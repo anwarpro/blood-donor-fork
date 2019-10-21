@@ -14,7 +14,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextView signupnow;
     private EditText phonetxt,passtxt;
-    private Button loginbtn;
+    private Button loginbtn, signupbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +34,27 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     passtxt.setError("Enter password");
                 }
+                else if (phonetxt.getText().toString().trim().length()<11)
+                {
+                    phonetxt.setError("Invalid");
+                }
                 else
                 {
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                     startActivity(intent);
                     LoginActivity.this.finish();
                 }
             }
         });
-
-        signupnow = findViewById(R.id.txtviewsignup);
-        signupnow.setOnClickListener(new View.OnClickListener() {
+        signupbtn = findViewById(R.id.btnsignin);
+        signupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this,SignupActivity.class);
                 startActivity(intent);
                 LoginActivity.this.finish();
             }
         });
+
     }
 }

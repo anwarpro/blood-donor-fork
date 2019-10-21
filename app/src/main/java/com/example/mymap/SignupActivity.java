@@ -60,6 +60,10 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
                 {
                     passtxt.setError("Enter Password");
                 }
+                else if (phonetxt.getText().toString().trim().length()<11 || phonetxt.getText().toString().trim().length()>11)
+                {
+                    phonetxt.setError("Invalid Number");
+                }
                 else
                 {
                     Intent intent = new Intent(SignupActivity.this,MainActivity.class);

@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_design"
     tools:context=".SignupActivity">
 
     <TextView
         android:id="@+id/signuptextview"
-        android:layout_width="168dp"
-        android:layout_height="63dp"
+        android:layout_width="150dp"
+        android:layout_height="220dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
-        android:text="SignUp"
+        android:background="@drawable/blood"
         android:textAlignment="center"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -23,13 +24,19 @@
 
     <EditText
         android:id="@+id/username"
-        android:inputType="textPersonName"
-        android:layout_width="214dp"
-        android:layout_height="47dp"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
+        android:textColor="#fff"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
-        android:hint="Name"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/ic_person"
+        android:drawablePadding="4dp"
+        android:hint="  Name"
+        android:inputType="textPersonName"
+        android:textColorHint="#fff"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/txtsignupphone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -41,15 +48,21 @@
 
     <EditText
         android:id="@+id/txtsignupphone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
         android:layout_marginStart="20dp"
+        android:textColor="#fff"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
+        android:drawableLeft="@drawable/ic_phone"
+        android:drawablePadding="4dp"
+        android:background="@android:color/transparent"
         android:ems="10"
-        android:hint="Phone"
+        android:hint="  Phone"
         android:inputType="phone"
+        android:textColorHint="#fff"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/txtsignuppassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,24 +70,32 @@
 
     <EditText
         android:id="@+id/txtsignuppassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:textColor="#fff"
         android:layout_marginTop="32dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/ic_key"
+        android:drawablePadding="4dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="  Password"
         android:inputType="textPassword"
+        android:textColorHint="#fff"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtsignupphone" />
 
     <Button
         android:id="@+id/btnsignup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
         android:layout_marginTop="60dp"
         android:text="Sign-up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        android:background="@drawable/btn_design_signup"
+        android:textColor="#fff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerbg" />
 
@@ -87,18 +108,31 @@
         android:textAlignment="center"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnsignup" />
 
     <Spinner
         android:id="@+id/spinnerbg"
-        android:layout_width="88dp"
-        android:layout_height="41dp"
+        android:layout_width="99dp"
+        android:layout_height="47dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtsignuppassword" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Add Blood Group"
+        android:textColor="#ffff
+"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerbg">
+
+    </TextView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
