@@ -2,22 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="@drawable/login_design"
+    android:background="@drawable/bgf"
     android:gravity="bottom"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:layout_width="109dp"
+        android:layout_width="70dp"
         android:layout_height="77dp"
         android:src="@mipmap/appicon"></ImageView>
+
     <TextView
+        android:id="@+id/txt_userdata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="Blood Donor"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#ffff">
+        android:textColor="#ffff"
+        android:textStyle="bold">
 
     </TextView>
 

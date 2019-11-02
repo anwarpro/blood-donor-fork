@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgf"
+    tools:context=".AddFeedActivity">
+
+    <TextView
+        android:id="@+id/txtaddfeed"
+        android:layout_width="match_parent"
+        android:text="Add Your Request"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="#ffff"
+        android:textSize="33sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+    <EditText
+        android:id="@+id/txt_feedname"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="150dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:textColor="#ffff"
+        android:textColorHint="#ffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/txtaddfeed"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/txt_feedaddress"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:textColor="#ffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_feedname" />
+
+    <EditText
+        android:id="@+id/txt_feedphone"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Phone"
+        android:inputType="textPersonName|phone"
+        android:textColor="#ffff"
+        android:textColorHint="#ffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_feedaddress" />
+
+    <Spinner
+        android:id="@+id/spinnerbloodgrp"
+        android:layout_width="99dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:entries="@array/blood_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_feedphone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Select Blood Group"
+        android:textColor="#ffff"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerbloodgrp"></TextView>
+
+    <Spinner
+        android:id="@+id/spinnerbloodbag"
+        android:layout_width="99dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:entries="@array/blood_bag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerbloodgrp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Select Quantity (Bag)"
+        android:textColor="#ffff"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerbloodbag"></TextView>
+    <Button
+        android:id="@+id/btnpost"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="60dp"
+        android:text="Post"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        android:background="@drawable/btn_design_signup"
+        android:textColor="#fff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerbloodbag" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

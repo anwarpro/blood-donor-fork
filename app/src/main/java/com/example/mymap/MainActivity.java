@@ -70,7 +70,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     Address address = addressList.get(0);
                     LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
                     map.addMarker(new MarkerOptions().position(latLng).title(location));
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,40));
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
 
                 }
                 return false;
@@ -118,7 +118,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             googleMap.setMyLocationEnabled(true);
                             LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
                             map.addMarker(new MarkerOptions().position(latLng).title("Current Location"));
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,20));
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
                         }
 
                     }

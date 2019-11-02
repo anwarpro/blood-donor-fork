@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:background="@drawable/bgf"
+    android:layout_marginTop="8dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:background="@drawable/rounded_textview"
+        android:padding="8dp">
+        <TextView
+            android:id="@+id/txt_bloodgroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textColor="#ffff"
+            android:text="O+"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:textColor="#ffff"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/txt_bloodgroup"
+            android:drawableLeft="@drawable/ic_person"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/txt_phone"
+            android:paddingTop="10dp"
+            android:drawablePadding="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="#ffff"
+            android:drawableLeft="@drawable/ic_phone"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_name"
+            android:text="Number" />
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

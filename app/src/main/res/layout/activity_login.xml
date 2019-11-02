@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_design"
+    android:background="@drawable/bgf"
     tools:context=".LoginActivity">
 
         <Button
@@ -50,9 +50,9 @@
         <EditText
             android:id="@+id/txtloginpassword"
             android:layout_width="200dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginTop="30dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/textview_blur"
             android:drawableLeft="@drawable/ic_key"
             android:drawablePadding="4dp"
             android:ems="10"
@@ -68,16 +68,16 @@
         <EditText
             android:id="@+id/txtloginphone"
             android:layout_width="200dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="20dp"
-            android:background="@android:color/transparent"
-            android:drawableLeft="@drawable/ic_phone"
+            android:background="@drawable/textview_blur"
+            android:drawableLeft="@drawable/ic_email"
             android:drawablePadding="4dp"
             android:ems="10"
-            android:hint="  Phone"
-            android:inputType="phone"
+            android:hint="  E-mail"
+            android:inputType="textEmailAddress"
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="12sp"

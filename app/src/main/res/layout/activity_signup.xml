@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_design"
+    android:background="@drawable/bgf"
     tools:context=".SignupActivity">
 
     <TextView
         android:id="@+id/signuptextview"
-        android:layout_width="150dp"
-        android:layout_height="220dp"
+        android:layout_width="111dp"
+        android:layout_height="151dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
@@ -27,22 +27,20 @@
         android:layout_width="200dp"
         android:layout_height="35dp"
         android:layout_marginStart="20dp"
-        android:textColor="#fff"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/textview_blur"
         android:drawableLeft="@drawable/ic_person"
         android:drawablePadding="4dp"
         android:hint="  Name"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textCapWords"
+        android:textColor="#fff"
         android:textColorHint="#fff"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtsignupphone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signuptextview"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/signuptextview">
 
     </EditText>
 
@@ -51,40 +49,59 @@
         android:layout_width="200dp"
         android:layout_height="35dp"
         android:layout_marginStart="20dp"
-        android:textColor="#fff"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:background="@drawable/textview_blur"
         android:drawableLeft="@drawable/ic_phone"
         android:drawablePadding="4dp"
-        android:background="@android:color/transparent"
         android:ems="10"
         android:hint="  Phone"
         android:inputType="phone"
+        android:textColor="#fff"
         android:textColorHint="#fff"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtsignuppassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <EditText
-        android:id="@+id/txtsignuppassword"
+        android:id="@+id/txtsignupemail"
         android:layout_width="200dp"
         android:layout_height="35dp"
-        android:textColor="#fff"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/ic_key"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/textview_blur"
+        android:drawableLeft="@drawable/ic_email"
         android:drawablePadding="4dp"
         android:ems="10"
-        android:hint="  Password"
-        android:inputType="textPassword"
+        android:hint="  E-mail"
+        android:inputType="textEmailAddress"
+        android:textColor="#fff"
         android:textColorHint="#fff"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtsignupphone" />
+
+    <EditText
+        android:id="@+id/txtsignuppassword"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/textview_blur"
+        android:drawableLeft="@drawable/ic_key"
+        android:drawablePadding="4dp"
+        android:ems="10"
+        android:hint="  Password"
+        android:inputType="textPassword"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtsignupemail" />
 
     <Button
         android:id="@+id/btnsignup"
@@ -128,8 +145,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:text="Add Blood Group"
-        android:textColor="#ffff
-"
+        android:textColor="#ffff"
         app:layout_constraintTop_toBottomOf="@+id/spinnerbg">
 
     </TextView>

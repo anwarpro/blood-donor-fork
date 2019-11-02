@@ -9,24 +9,73 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity"></activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".RulesActivity" android:screenOrientation="portrait" android:parentActivityName=".HomeActivity"></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".AddByAdmin" android:screenOrientation="portrait"/>
+        <activity android:name=".AdminActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ThalassemiaActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".BankActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".HospitalActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".DonorDataActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".DonorActivity" />
+        <activity
+            android:name=".AboutActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".DonorActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddFeedActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".FeedActivity" />
+        <activity
+            android:name=".FeedActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".HomeActivity" android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".SignupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
 </manifest>

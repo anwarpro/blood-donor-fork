@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#660000"
+    tools:context=".FeedActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_add_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_add_box_black_24dp"
+        android:background="#660000"
+        >
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:background="@drawable/bgf"
+        android:layout_height="match_parent"
+        android:id="@+id/listviewfeed"/>
+
+</FrameLayout>
