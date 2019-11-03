@@ -79,7 +79,9 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="Select Blood Group"
         android:textColor="#ffff"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerbloodgrp"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/spinnerbloodgrp">
+
+    </TextView>
 
     <Spinner
         android:id="@+id/spinnerbloodbag"
@@ -98,7 +100,9 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="Select Quantity (Bag)"
         android:textColor="#ffff"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerbloodbag"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/spinnerbloodbag">
+
+    </TextView>
     <Button
         android:id="@+id/btnpost"
         android:layout_width="200dp"
@@ -111,5 +115,17 @@
         android:textColor="#fff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerbloodbag" />
+    <Button
+        android:id="@+id/btnmypost"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:text="My Posts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        android:background="@drawable/btn_design_signup"
+        android:textColor="#fff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnpost" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

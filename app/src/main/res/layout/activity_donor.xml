@@ -42,7 +42,7 @@
 
             <Spinner
                 android:id="@+id/spinnerarea"
-                android:layout_width="160dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/toolview"
                 android:layout_alignStart="@+id/toolview"
