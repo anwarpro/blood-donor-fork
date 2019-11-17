@@ -4,131 +4,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgf"
+    android:background="#fffff"
     tools:context=".ProfileActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:orientation="vertical"
+        >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="300dp"
-        android:layout_height="350dp"
-        android:background="@drawable/textview_blur"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.157">
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bgf"
+            android:layout_weight="6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
-    <TextView
-        android:id="@+id/profilename"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:gravity="center"
-        android:text="Evan"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/userimg"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="131dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginEnd="130dp"
+                android:background="@drawable/userimg">
 
-    </TextView>
+            </TextView>
 
-    <TextView
-        android:id="@+id/profilenumber"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50sp"
-        android:gravity="center"
-        android:drawableLeft="@drawable/ic_phone"
-        android:drawablePadding="6dp"
-        android:text="01521329977"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilename">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/userimg"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="148dp"
+                android:text="Evan"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="145dp"
+                android:background="@drawable/textview_blur"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@+id/userimg">
 
-    </TextView>
+            </TextView>
 
-    <TextView
-        android:id="@+id/profilemail"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50sp"
-        android:gravity="center"
-        android:drawableLeft="@drawable/ic_email"
-        android:drawablePadding="6dp"
-        android:text="emranevan@gmail.com"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilenumber">
+        </RelativeLayout>
 
-    </TextView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            tools:layout_editor_absoluteX="75dp">
 
-    <TextView
-        android:id="@+id/profilblood"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50sp"
-        android:gravity="center"
-        android:text="O+"
-        android:textAlignment="center"
-        android:drawableLeft="@drawable/ic_drop"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilemail">
+            <TextView
+                android:id="@+id/usermail"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:drawableLeft="@drawable/ic_email_black"
+                android:gravity="center">
 
-    </TextView>
+            </TextView>
 
-    <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:background="@drawable/whitebackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:drawableLeft="@drawable/ic_phone_black"
+                android:gravity="center"
+                android:text="evanemran">
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchbtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="119dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginEnd="131dp"
-            android:gravity="center">
+            </TextView>
 
-        </androidx.appcompat.widget.SwitchCompat>
-
-        <TextView
-            android:id="@+id/txtdonatestatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/switchbtn"
-            android:text="Not Ready to Donate"
-            android:textSize="16sp"
-            android:textColor="#fff"
-            android:textAlignment="center"
-            android:textStyle="italic"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="86dp"
-            android:layout_marginTop="57dp"
-            android:layout_marginEnd="93dp">
-        </TextView>
-    </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

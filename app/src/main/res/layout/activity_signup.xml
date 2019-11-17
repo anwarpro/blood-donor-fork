@@ -24,7 +24,7 @@
 
     <EditText
         android:id="@+id/username"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
@@ -46,7 +46,7 @@
 
     <EditText
         android:id="@+id/txtsignupphone"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
@@ -67,7 +67,7 @@
 
     <EditText
         android:id="@+id/txtsignupemail"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
@@ -87,7 +87,7 @@
 
     <EditText
         android:id="@+id/txtsignuppassword"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/textview_blur"
@@ -132,10 +132,11 @@
 
     <Spinner
         android:id="@+id/spinnerbg"
-        android:layout_width="99dp"
-        android:layout_height="47dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/textview_blur"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtsignuppassword" />
@@ -144,7 +145,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Add Blood Group"
+        android:text="Select Blood Group"
         android:textColor="#ffff"
         app:layout_constraintTop_toBottomOf="@+id/spinnerbg">
 

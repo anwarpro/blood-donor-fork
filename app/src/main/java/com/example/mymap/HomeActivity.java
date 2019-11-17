@@ -51,7 +51,7 @@ import java.util.List;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class HomeActivity extends AppCompatActivity {
-    CardView donor,map,feed,bed,hospital,bank,profile,about;
+    CardView donor,map,feed,bed,hospital,bank,profile,about,group;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
         profile = findViewById(R.id.profilecard);
         about = findViewById(R.id.aboutcard);
         donor = findViewById(R.id.donorcard);
+        group = findViewById(R.id.groupcard);
 
         donor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +95,7 @@ public class HomeActivity extends AppCompatActivity {
         bed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,ThalassemiaActivity.class);
+                Intent intent = new Intent(HomeActivity.this,AddFeedActivity.class);
                 startActivity(intent);
             }
         });
@@ -123,6 +124,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this,RulesActivity.class);
+                startActivity(intent);
+            }
+        });
+        group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,GroupsActivity.class);
                 startActivity(intent);
             }
         });

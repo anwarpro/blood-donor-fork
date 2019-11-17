@@ -7,43 +7,36 @@
     android:background="@drawable/bgf"
     tools:context=".AddFeedActivity">
 
-    <TextView
-        android:id="@+id/txtaddfeed"
-        android:layout_width="match_parent"
-        android:text="Add Your Request"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="#ffff"
-        android:textSize="33sp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-    </TextView>
     <EditText
         android:id="@+id/txt_feedname"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/textview_blur"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="#ffff"
         android:textColorHint="#ffff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/txtaddfeed"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/txt_feedaddress"
         android:layout_width="300dp"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/textview_blur"
         android:ems="10"
+        android:textAlignment="center"
         android:textColor="#ffff"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_feedname" />
 
@@ -53,24 +46,57 @@
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:textAlignment="center"
         android:hint="Phone"
         android:inputType="textPersonName|phone"
+        android:background="@drawable/textview_blur"
         android:textColor="#ffff"
         android:textColorHint="#ffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_feedaddress" />
+    <EditText
+        android:id="@+id/txt_feeddate"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:hint="Date"
+        android:inputType="date"
+        android:background="@drawable/textview_blur"
+        android:textColor="#ffff"
+        android:textColorHint="#ffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_feedphone" />
+    <EditText
+        android:id="@+id/txt_feedhosp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:hint="Hospital/Clinic"
+        android:inputType="text"
+        android:background="@drawable/textview_blur"
+        android:textColor="#ffff"
+        android:textColorHint="#ffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_feeddate" />
 
     <Spinner
         android:id="@+id/spinnerbloodgrp"
         android:layout_width="99dp"
         android:layout_height="47dp"
+        android:background="@drawable/textview_blur"
         android:layout_marginTop="20dp"
         android:entries="@array/blood_group"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_feedphone" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_feedhosp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,6 +117,7 @@
         android:entries="@array/blood_bag"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        android:background="@drawable/textview_blur"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerbloodgrp" />
     <TextView

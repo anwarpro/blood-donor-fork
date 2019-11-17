@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FeedActivity extends AppCompatActivity {
-    FloatingActionButton fabpost;
     ListView listView;
     List<Feed> feedList;
     DatabaseReference databaseReference;
@@ -34,19 +33,8 @@ public class FeedActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("feed");
-
-        fabpost = findViewById(R.id.button_add_post);
         listView = findViewById(R.id.listviewfeed);
         feedList = new ArrayList<>();
-
-        fabpost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FeedActivity.this,AddFeedActivity.class);
-                startActivity(intent);
-
-            }
-        });
     }
 
     @Override

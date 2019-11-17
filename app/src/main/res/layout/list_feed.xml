@@ -9,19 +9,19 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="115dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/rounded_textview"
         android:padding="8dp">
 
         <TextView
             android:id="@+id/txt_blood_groupfeed"
-            android:layout_width="45dp"
-            android:layout_height="46dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentEnd="true"
             android:text="O+"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#ffff"
-            android:textSize="30sp" />
+            android:textSize="45sp" />
 
         <TextView
             android:id="@+id/txt_namefeed"
@@ -49,9 +49,21 @@
             android:text="Address" />
 
         <TextView
-            android:id="@+id/txt_bagfeed"
+            android:id="@+id/txt_timefeed"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
+            android:layout_below="@+id/txt_addressfeed"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/ic_date"
+            android:drawablePadding="6dp"
+            android:inputType="date"
+            android:text="Date"
+            android:textColor="#ffff" />
+
+        <TextView
+            android:id="@+id/txt_bagfeed"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:layout_below="@id/txt_namefeed"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="30dp"
@@ -65,9 +77,21 @@
             android:layout_height="wrap_content"
             android:drawablePadding="6dp"
             android:drawableLeft="@drawable/ic_phone"
-            android:layout_below="@id/txt_addressfeed"
+            android:layout_below="@id/txt_timefeed"
             android:layout_marginTop="8dp"
             android:text="Phone"
+            android:textColor="#ffff" />
+
+        <TextView
+            android:id="@+id/txt_reasonfeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_phonefeed"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/ic_reason"
+            android:drawablePadding="6dp"
+            android:inputType="text"
+            android:text="Reason"
             android:textColor="#ffff" />
 
     </RelativeLayout>
