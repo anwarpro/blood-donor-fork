@@ -30,11 +30,11 @@ public class ProfileActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b == true)
                 {
-                    txtstatus.setText("Ready to Doante");
+                    txtstatus.setText("Yes");
                 }
                 else if (b == false)
                 {
-                    txtstatus.setText("Not Ready to Doante");
+                    txtstatus.setText("No");
                 }
             }
         });
