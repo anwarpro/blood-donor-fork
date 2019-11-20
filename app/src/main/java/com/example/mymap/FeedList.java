@@ -34,6 +34,8 @@ public class FeedList extends ArrayAdapter<Feed> {
         TextView txtblood = (TextView) listViewItem.findViewById(R.id.txt_blood_groupfeed);
         TextView txtbloodbag = (TextView) listViewItem.findViewById(R.id.txt_bagfeed);
         TextView txtphone = (TextView) listViewItem.findViewById(R.id.txt_phonefeed);
+        TextView txtdate = (TextView) listViewItem.findViewById(R.id.txt_timefeed);
+        TextView txthosp = (TextView) listViewItem.findViewById(R.id.txt_areafeed);
         Feed feed = feedList.get(position);
 
         txtname.setText(feed.getFeedName());
@@ -41,6 +43,8 @@ public class FeedList extends ArrayAdapter<Feed> {
         txtblood.setText(feed.getFeedBlood());
         txtbloodbag.setText(feed.getFeedAmount()+" Bag");
         txtphone.setText(feed.getFeedPhone());
+        txtdate.setText(feed.getFeedDate());
+        txthosp.setText(feed.getFeedHosp());
         return listViewItem;
     }
 }

@@ -3,7 +3,10 @@ package com.example.mymap;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -16,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HospitalActivity extends AppCompatActivity {
+    public static final String HOSP_NAME = "name";
+    public static final String HOSP_PHONE = "1234";
     ListView listViewHospital;
     DatabaseReference databaseReference;
     List<Hospital> hospitalList;
@@ -31,6 +36,16 @@ public class HospitalActivity extends AppCompatActivity {
 
         listViewHospital = findViewById(R.id.listviewhospital);
         hospitalList = new ArrayList<>();
+        listViewHospital.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Hospital hospital = hospitalList.get(i);
+                Intent intent = new Intent(HospitalActivity.this,PopupActivity.class);
+                intent.putExtra(HOSP_NAME,hospital.getHospitalName());
+                intent.putExtra(HOSP_PHONE,hospital.getHospitalPhone());
+                startActivity(intent);
+            }
+        });
 
     }
 

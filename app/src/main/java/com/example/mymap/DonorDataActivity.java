@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,13 +47,15 @@ public class DonorDataActivity extends AppCompatActivity {
         });
     }
     private void makePhoneCall(){
-        String phonenum = txtcallphone.getText().toString();
+        String phonenum = txtcallname.getText().toString();
+        String donor = txtcallphone.getText().toString();
         if (ContextCompat.checkSelfPermission(DonorDataActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(DonorDataActivity.this, new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         }
         else{
             String dial = "tel:" + phonenum;
             startActivity(new Intent(Intent.ACTION_CALL,Uri.parse(dial)));
+            Toast.makeText(this, "calling " + donor, Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -43,16 +43,15 @@
 
             </TextView>
 
-            <TextView
-                android:id="@+id/userproname"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:drawableLeft="@drawable/ic_person"
+            <EditText
+                android:id="@+id/etname1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/userimg"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="40dp"
-                android:text="Evan"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/textview_blur"
                 android:textAlignment="center"
                 android:textColor="#fff"
                 android:textSize="24sp"
@@ -60,7 +59,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userimg">
 
-            </TextView>
+            </EditText>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -72,111 +71,72 @@
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
             tools:layout_editor_absoluteX="75dp">
 
-            <TextView
-                android:id="@+id/userpromail"
+            <EditText
+                android:id="@+id/etmail"
                 android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_height="47dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:drawableLeft="@drawable/ic_email_black"
                 android:gravity="center"
                 android:layout_marginTop="20dp"
-                android:text="evanemran007@gmail.com"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-            </TextView>
+            </EditText>
 
-            <TextView
-                android:id="@+id/userprophone"
+            <EditText
+                android:id="@+id/etphone"
                 android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/userpromail"
+                android:layout_height="47dp"
+                android:layout_below="@+id/etmail"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="20dp"
                 android:drawableLeft="@drawable/ic_phone_black"
                 android:gravity="center"
-                android:text="01521329977"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userpromail">
+                app:layout_constraintTop_toBottomOf="@+id/etmail">
 
-            </TextView>
+            </EditText>
 
-            <TextView
-                android:id="@+id/textView3"
+            <EditText
+                android:id="@+id/etblood"
                 android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/userprophone"
+                android:layout_height="47dp"
+                android:layout_below="@+id/etphone"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="20dp"
                 android:drawableLeft="@drawable/ic_invert"
                 android:gravity="center"
-                android:text="O+"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userprophone">
+                app:layout_constraintTop_toBottomOf="@+id/etphone">
 
-            </TextView>
+            </EditText>
 
             <Button
-                android:id="@+id/textView4"
+                android:id="@+id/btncon"
                 android:layout_width="300dp"
                 android:layout_height="47dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="Update Profile"
+                android:text="Confirm"
                 android:textColor="#fff"
                 android:background="@drawable/btn_design_signup"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3">
+                app:layout_constraintTop_toBottomOf="@+id/etblood">
 
             </Button>
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Are you ready to donate?"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4">
-
-            </TextView>
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switchbtn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:gravity="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5">
-
-            </androidx.appcompat.widget.SwitchCompat>
-
-            <TextView
-                android:id="@+id/txtdonatestatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/switchbtn">
-
-            </TextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

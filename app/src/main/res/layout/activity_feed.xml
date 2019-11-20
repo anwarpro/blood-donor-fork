@@ -12,6 +12,8 @@
         android:padding="8dp"
         android:background="@drawable/bgf"
         android:layout_height="match_parent"
-        android:id="@+id/listviewfeed"/>
+        android:id="@+id/listviewfeed"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"/>
 
 </FrameLayout>

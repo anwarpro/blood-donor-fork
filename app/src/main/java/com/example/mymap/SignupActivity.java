@@ -96,6 +96,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
 
                             }
                             else {
+                                signupbtn.setEnabled(false);
                                 Intent intent = new Intent(SignupActivity.this,HomeActivity.class);
                                 startActivity(intent);
                                 SignupActivity.this.finish();

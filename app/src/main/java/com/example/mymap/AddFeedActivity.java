@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class AddFeedActivity extends AppCompatActivity {
-    EditText txtName,txtPhone;
+    EditText txtName,txtPhone,txtdate,txthosp;
     Spinner spinnerBlood,spinnerBag;
     Button btnPost;
     DatabaseReference databaseReference;
@@ -39,6 +39,8 @@ public class AddFeedActivity extends AppCompatActivity {
         spinnerBag = findViewById(R.id.spinnerbloodbag);
         spinnerBlood = findViewById(R.id.spinnerbloodgrp);
         btnPost = findViewById(R.id.btnpost);
+        txtdate = findViewById(R.id.txt_feeddate);
+        txthosp = findViewById(R.id.txt_feedhosp);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddFeedActivity.this,R.layout.custom_spinner,getResources().getStringArray(R.array.blood_area));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -60,12 +62,14 @@ public class AddFeedActivity extends AppCompatActivity {
         String name = txtName.getText().toString().trim();
         String address = spinneraddarea.getSelectedItem().toString();
         String phone = txtPhone.getText().toString().trim();
+        String date = txtdate.getText().toString().trim();
+        String hosp = txthosp.getText().toString().trim();
         String bloodgrp = spinnerBlood.getSelectedItem().toString();
         String bloodbag = spinnerBag.getSelectedItem().toString();
-        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(address))
+        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(date))
         {
             String id = databaseReference.push().getKey();
-            Feed feed = new Feed(id,name,address,bloodgrp,phone,bloodbag);
+            Feed feed = new Feed(id,name,address,bloodgrp,phone,bloodbag,date,hosp);
             databaseReference.child(id).setValue(feed);
             Toast.makeText(this, "Posted", Toast.LENGTH_SHORT).show();
             AddFeedActivity.this.finish();

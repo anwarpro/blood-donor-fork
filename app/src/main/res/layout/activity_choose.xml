@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/bgf"
+    android:layout_height="match_parent"
+    tools:context=".AdminActivity">
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="530dp"
+        android:background="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/bApos"
+            android:layout_width="70dp"
+            android:layout_height="95dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/apositive" />
+
+        <TextView
+            android:id="@+id/bAneg"
+            android:layout_width="70dp"
+            android:layout_height="95dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_toEndOf="@+id/bApos"
+            android:background="@drawable/anegative" />
+
+        <TextView
+            android:id="@+id/bBpos"
+            android:layout_width="70dp"
+            android:layout_height="95dp"
+            android:background="@drawable/bpositive"
+            android:layout_below="@+id/bApos"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp" />
+
+        <TextView
+            android:id="@+id/bBneg"
+            android:layout_width="70dp"
+            android:layout_height="95dp"
+            android:layout_below="@+id/bAneg"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bnegative"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:layout_toEndOf="@+id/bBpos" />
+        <TextView
+            android:id="@+id/bOpos"
+            android:layout_width="70dp"
+            android:layout_height="95dp"
+            android:background="@drawable/opositive"
+            android:layout_below="@+id/bBpos"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp" />
+        <TextView
+            android:id="@+id/bOneg"
+            android:layout_width="70dp"
+            android:layout_height="95dp"
+            android:layout_below="@+id/bBneg"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/onegative"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:layout_toEndOf="@+id/bOpos" />
+        <TextView
+            android:id="@+id/bABpos"
+            android:layout_width="70dp"
+            android:layout_height="95dp"
+            android:background="@drawable/abpositive"
+            android:layout_below="@+id/bOpos"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp" />
+        <TextView
+            android:id="@+id/bABneg"
+            android:layout_width="70dp"
+            android:layout_height="95dp"
+            android:layout_below="@+id/bOneg"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/abnegative"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:layout_toEndOf="@+id/bABpos" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

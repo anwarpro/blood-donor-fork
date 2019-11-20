@@ -7,19 +7,23 @@ public class Feed {
     String feedBlood;
     String feedPhone;
     String feedAmount;
+    String feedDate;
+    String feedHosp;
 
     public Feed()
     {
 
     }
 
-    public Feed(String feedId, String feedName, String feedAddress, String feedBlood, String feedPhone, String feedAmount) {
+    public Feed(String feedId, String feedName, String feedAddress, String feedBlood, String feedPhone, String feedAmount, String feedDate, String feedHosp) {
         this.feedId = feedId;
         this.feedName = feedName;
         this.feedAddress = feedAddress;
         this.feedBlood = feedBlood;
         this.feedPhone = feedPhone;
         this.feedAmount = feedAmount;
+        this.feedDate = feedDate;
+        this.feedHosp = feedHosp;
     }
 
     public String getFeedId() {
@@ -44,5 +48,13 @@ public class Feed {
 
     public String getFeedAmount() {
         return feedAmount;
+    }
+    public String getFeedDate()
+    {
+        return feedDate;
+    }
+
+    public String getFeedHosp() {
+        return feedHosp;
     }
 }
