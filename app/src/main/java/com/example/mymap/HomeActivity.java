@@ -149,7 +149,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.itemhelp:
-                Toast.makeText(this, "Help!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Call 01521329977", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.itemlogout:

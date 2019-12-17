@@ -118,7 +118,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                             googleMap.setMyLocationEnabled(true);
                             LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
                             map.addMarker(new MarkerOptions().position(latLng).title("Current Location"));
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
                         }
 
                     }

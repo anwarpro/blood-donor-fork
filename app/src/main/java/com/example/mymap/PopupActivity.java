@@ -34,8 +34,12 @@ public class PopupActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra(HospitalActivity.HOSP_NAME);
         String phone = intent.getStringExtra(HospitalActivity.HOSP_PHONE);
+        String bname = intent.getStringExtra(BankActivity.BANK_NAME);
+        String fname = intent.getStringExtra(FeedActivity.FEED_NAME);
 
         hospnamepop.setText(name);
+        hospnamepop.setText(bname);
+        hospnamepop.setText(fname);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -43,7 +47,7 @@ public class PopupActivity extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width*0.8),(int)(height*0.3));
+        getWindow().setLayout((int) (width*0.8),(int)(height*0.25));
 
 
 
@@ -51,6 +55,17 @@ public class PopupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 makePhoneCall();
+                PopupActivity.this.finish();
+            }
+        });
+
+
+        bndir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(PopupActivity.this,DirectionActivity.class);
+                startActivity(intent1);
+                PopupActivity.this.finish();
             }
         });
     }
@@ -58,6 +73,10 @@ public class PopupActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra(HospitalActivity.HOSP_NAME);
         String phone = intent.getStringExtra(HospitalActivity.HOSP_PHONE);
+        String bname = intent.getStringExtra(BankActivity.BANK_NAME);
+        String bphone = intent.getStringExtra(BankActivity.BANK_PHONE);
+        String fname = intent.getStringExtra(FeedActivity.FEED_NAME);
+        String fphone = intent.getStringExtra(FeedActivity.FEED_PHONE);
         if (ContextCompat.checkSelfPermission(PopupActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(PopupActivity.this, new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         }
@@ -65,6 +84,14 @@ public class PopupActivity extends AppCompatActivity {
             String dial = "tel:" + phone;
             startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
             Toast.makeText(this, "calling " + name, Toast.LENGTH_SHORT).show();
+
+            String dialb = "tel:" + bphone;
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dialb)));
+            Toast.makeText(this, "calling " + bname, Toast.LENGTH_SHORT).show();
+
+            String dialf = "tel:" + fphone;
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dialf)));
+            Toast.makeText(this, "calling " + fname, Toast.LENGTH_SHORT).show();
         }
     }
     @Override

@@ -3,8 +3,10 @@ package com.example.mymap;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BankActivity extends AppCompatActivity {
+    public static final String BANK_NAME = "name";
+    public static final String BANK_PHONE = "1234";
     ListView listViewBank;
     DatabaseReference databaseReference;
     List<Bank> bankList;
@@ -33,6 +37,16 @@ public class BankActivity extends AppCompatActivity {
 
         listViewBank = findViewById(R.id.listviewbank);
         bankList = new ArrayList<>();
+        listViewBank.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bank bank = bankList.get(i);
+                Intent intent = new Intent(BankActivity.this,PopupActivity.class);
+                intent.putExtra(BANK_NAME,bank.getBankName());
+                intent.putExtra(BANK_PHONE,bank.getBankPhone());
+                startActivity(intent);
+            }
+        });
 
     }
 

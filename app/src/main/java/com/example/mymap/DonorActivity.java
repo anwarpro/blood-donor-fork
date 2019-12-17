@@ -60,29 +60,7 @@ public class DonorActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selected_group = spinner.getSelectedItem().toString();
-                if(selected_group.equals("All"))
-                {
-                    databaseReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            userList.clear();
-                            for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
-                            {
-                                User user = userSnapshot.getValue(User.class);
-                                userList.add(user);
-                            }
-                            UserList adapter = new UserList(DonorActivity.this,userList);
-                            listView.setAdapter(adapter);
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-                else
-                {
                     Query query1 = FirebaseDatabase.getInstance().getReference("users")
                             .orderByChild("userBlood")
                             .equalTo(selected_group);
@@ -106,11 +84,35 @@ public class DonorActivity extends AppCompatActivity {
                                 }
                             })
                     );
-                }
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                String selected_group = spinner.getSelectedItem().toString();
+                Query query1 = FirebaseDatabase.getInstance().getReference("users")
+                        .orderByChild("userBlood")
+                        .equalTo("A+");
+                query1.addListenerForSingleValueEvent(
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                userList.clear();
+                                for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
+                                {
+                                    User user = userSnapshot.getValue(User.class);
+                                    userList.add(user);
+                                }
+                                UserList adapter = new UserList(DonorActivity.this,userList);
+                                listView.setAdapter(adapter);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        })
+                );
 
             }
         });
@@ -148,23 +150,29 @@ public class DonorActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userList.clear();
-                for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
-                {
-                    User user = userSnapshot.getValue(User.class);
-                    userList.add(user);
-                }
-                UserList adapter = new UserList(DonorActivity.this,userList);
-                listView.setAdapter(adapter);
-            }
+        String selected_group = spinner.getSelectedItem().toString();
+        Query query1 = FirebaseDatabase.getInstance().getReference("users")
+                .orderByChild("userBlood")
+                .equalTo(selected_group);
+        query1.addListenerForSingleValueEvent(
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        userList.clear();
+                        for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
+                        {
+                            User user = userSnapshot.getValue(User.class);
+                            userList.add(user);
+                        }
+                        UserList adapter = new UserList(DonorActivity.this,userList);
+                        listView.setAdapter(adapter);
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                    }
+                })
+        );
     }
 }

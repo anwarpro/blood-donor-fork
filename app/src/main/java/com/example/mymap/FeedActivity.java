@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FeedActivity extends AppCompatActivity {
-    ListView listView;
+    public static final String FEED_NAME = "name";
+    public static final String FEED_PHONE = "1234";
+    ListView listViewfeed;
     List<Feed> feedList;
     DatabaseReference databaseReference;
 
@@ -33,8 +37,18 @@ public class FeedActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("feed");
-        listView = findViewById(R.id.listviewfeed);
+        listViewfeed = findViewById(R.id.listviewfeed);
         feedList = new ArrayList<>();
+        listViewfeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Feed feed = feedList.get(i);
+                Intent intent = new Intent(FeedActivity.this,PopupActivity.class);
+                intent.putExtra(FEED_NAME,feed.getFeedName());
+                intent.putExtra(FEED_PHONE,feed.getFeedPhone());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -50,7 +64,7 @@ public class FeedActivity extends AppCompatActivity {
                     feedList.add(feed);
                 }
                 FeedList adapter = new FeedList(FeedActivity.this,feedList);
-                listView.setAdapter(adapter);
+                listViewfeed.setAdapter(adapter);
 
             }
 
