@@ -18,7 +18,7 @@ public class GroupsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         webview = findViewById(R.id.webview);
         webview.setWebViewClient(new WebViewClient());
-        webview.loadUrl("http://evanemran.blogspot.com/");
+        webview.loadUrl("https://blooddonorsocial.blogspot.com/");
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
     }

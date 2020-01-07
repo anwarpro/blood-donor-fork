@@ -2,6 +2,7 @@ package com.example.mymap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Trace;
 import android.text.TextUtils;
@@ -18,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AddFeedActivity extends AppCompatActivity {
     EditText txtName,txtPhone,txtdate,txthosp;
     Spinner spinnerBlood,spinnerBag;
-    Button btnPost;
+    Button btnPost,btnLoc;
     DatabaseReference databaseReference;
     Spinner spinneraddarea;
 
@@ -41,6 +42,7 @@ public class AddFeedActivity extends AppCompatActivity {
         btnPost = findViewById(R.id.btnpost);
         txtdate = findViewById(R.id.txt_feeddate);
         txthosp = findViewById(R.id.txt_feedhosp);
+        btnLoc = findViewById(R.id.btnaddloc);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddFeedActivity.this,R.layout.custom_spinner,getResources().getStringArray(R.array.blood_area));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -51,6 +53,13 @@ public class AddFeedActivity extends AppCompatActivity {
             public void onClick(View view) {
                 addFeed();
 
+            }
+        });
+        btnLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddFeedActivity.this,AddLocationActivity.class);
+                startActivity(intent);
             }
         });
 

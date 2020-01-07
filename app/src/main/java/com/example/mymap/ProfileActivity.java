@@ -14,12 +14,23 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
     public static final String USER_NAME = "name";
     public static final String USER_MAIL = "mail";
     public static final String USER_PHONE = "1234";
     public static final String USER_BLOOD = "O+";
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
     TextView txtstatus,txtproname,txtpromail,txtprophone,txtproblood;
     SwitchCompat switchbar;
     Button updatebtn;
@@ -37,6 +48,36 @@ public class ProfileActivity extends AppCompatActivity {
         txtpromail = findViewById(R.id.userpromail);
         txtproname = findViewById(R.id.userproname);
         txtprophone = findViewById(R.id.userprophone);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("users");
+
+        Query query =databaseReference.orderByChild("email").equalTo(firebaseUser.getEmail());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren())
+                {
+                    String name = ""+ ds.child("userName").getValue();
+                    String phone = ""+ ds.child("userPhone").getValue();
+                    String blood = ""+ ds.child("userBlood").getValue();
+
+                    txtproname.setText(name);
+                    txtprophone.setText(phone);
+                    txtproblood.setText(blood);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
         switchbar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

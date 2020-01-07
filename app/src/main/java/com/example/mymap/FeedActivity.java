@@ -24,7 +24,7 @@ import java.util.List;
 public class FeedActivity extends AppCompatActivity {
     public static final String FEED_NAME = "name";
     public static final String FEED_PHONE = "1234";
-    ListView listViewfeed;
+    ListView listViewFeed;
     List<Feed> feedList;
     DatabaseReference databaseReference;
 
@@ -37,9 +37,9 @@ public class FeedActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("feed");
-        listViewfeed = findViewById(R.id.listviewfeed);
+        listViewFeed = findViewById(R.id.listviewfeed);
         feedList = new ArrayList<>();
-        listViewfeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewFeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Feed feed = feedList.get(i);
@@ -64,7 +64,7 @@ public class FeedActivity extends AppCompatActivity {
                     feedList.add(feed);
                 }
                 FeedList adapter = new FeedList(FeedActivity.this,feedList);
-                listViewfeed.setAdapter(adapter);
+                listViewFeed.setAdapter(adapter);
 
             }
 

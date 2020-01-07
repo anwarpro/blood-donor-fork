@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Address;
@@ -14,7 +13,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -25,7 +23,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -34,19 +31,19 @@ import java.util.List;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-public class MainActivity  extends FragmentActivity implements OnMapReadyCallback {
+public class AddLocationActivity extends FragmentActivity implements OnMapReadyCallback {
 
     GoogleMap map;
     SupportMapFragment mapFragment;
     SearchView searchView;
-    Button btnpat;
+    Button btncon;
     private FusedLocationProviderClient client;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add_location);
 
         requestPermission();
 
@@ -56,14 +53,11 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         searchView = findViewById(R.id.sv_location);
-        btnpat = findViewById(R.id.btnmppat);
-        btnpat.setOnClickListener(new View.OnClickListener() {
+        btncon = findViewById(R.id.btnconloc);
+        btncon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnpat.setVisibility(View.GONE);
-                LatLng latLng = new LatLng(23.7561,90.3872);
-                map.addMarker(new MarkerOptions().position(latLng).title("Evan"));
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
+                AddLocationActivity.this.finish();
             }
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -74,7 +68,7 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
 
                 if(location!=null || !location.equals(""))
                 {
-                    Geocoder geocoder = new Geocoder(MainActivity.this);
+                    Geocoder geocoder = new Geocoder(AddLocationActivity.this);
                     try {
                         addressList = geocoder.getFromLocationName(location, 1);
                     } catch (IOException e) {
@@ -105,7 +99,6 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
 
 
 
-
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
@@ -117,20 +110,33 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
             if (!success) {
                 Toast.makeText(this, "Couldn't Connect!", Toast.LENGTH_SHORT).show();
             }
-            else if(ActivityCompat.checkSelfPermission(MainActivity.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            else if(ActivityCompat.checkSelfPermission(AddLocationActivity.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             {
                 return;
 
             }
             else
             {
-                client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
+                client.getLastLocation().addOnSuccessListener(AddLocationActivity.this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
                         if (location!=null)
                         {
                             googleMap.setMyLocationEnabled(true);
                             LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                            map.addMarker(new MarkerOptions().position(latLng).title("Current Location"));
+                            map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                                @Override
+                                public void onMapClick(LatLng latLng) {
+                                    MarkerOptions markerOptions = new MarkerOptions();
+                                    markerOptions.position(latLng);
+                                    markerOptions.title(latLng.latitude+" : " + latLng.longitude);
+                                    map.clear();
+                                    map.addMarker(markerOptions);
+                                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
+
+                                }
+                            });
                             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
                         }
 
@@ -142,43 +148,6 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
             Toast.makeText(this, "Check your connection", Toast.LENGTH_SHORT).show();
         }
 
-        /*if(ActivityCompat.checkSelfPermission(MainActivity.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            return;
-
-        }
-        else
-        {
-            client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    if (location!=null)
-                    {
-                        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-                        map.addMarker(new MarkerOptions().position(latLng).title("Current Location"));
-                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,40));
-                    }
-
-                }
-            });
-        }*/
-
-
-        /*client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location!=null)
-                {
-                    LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-                    map.addMarker(new MarkerOptions().position(latLng).title("Current LOcation"));
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,40));
-                }
-
-            }
-        });
-        LatLng Dhaka = new LatLng(23.774287, 90.366169);
-        map.addMarker(new MarkerOptions().position(Dhaka).title("Shyamoli"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(Dhaka));*/
 
     }
     private void requestPermission()

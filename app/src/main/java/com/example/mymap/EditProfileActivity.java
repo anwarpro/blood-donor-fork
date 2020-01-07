@@ -20,7 +20,6 @@ public class EditProfileActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Edit Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        etname = findViewById(R.id.etname1);
         etmail = findViewById(R.id.etmail);
         etphone = findViewById(R.id.etphone);
         etblood = findViewById(R.id.etblood);
@@ -32,8 +31,7 @@ public class EditProfileActivity extends AppCompatActivity {
         String phone = intent.getStringExtra(ProfileActivity.USER_PHONE);
         String blood = intent.getStringExtra(ProfileActivity.USER_BLOOD);
 
-        etname.setText(name);
-        etmail.setText(mail);
+        etmail.setText(name);
         etphone.setText(phone);
         etblood.setText(blood);
 

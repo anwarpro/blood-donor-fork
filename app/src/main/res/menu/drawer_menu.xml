@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_bank"
+            android:icon="@drawable/ic_person_black"
+            android:title="Blood Banks">
+
+        </item>
+        <item android:id="@+id/nav_hospital"
+            android:icon="@drawable/ic_person_black"
+            android:title="Hospital">
+
+        </item>
+        <item android:id="@+id/nav_patients"
+            android:icon="@drawable/ic_person_black"
+            android:title="patients">
+
+        </item>
+    </group>
+
+</menu>

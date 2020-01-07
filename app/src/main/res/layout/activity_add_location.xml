@@ -14,7 +14,6 @@
         android:layout_height="match_parent">
 
     </fragment>
-
     <SearchView
 
         android:id="@+id/sv_location"
@@ -31,22 +30,21 @@
     </SearchView>
 
     <Button
-        android:id="@+id/btnmppat"
+        android:id="@+id/btnconloc"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignEnd="@+id/map"
         android:layout_alignBottom="@+id/map"
         android:layout_alignParentStart="true"
         android:background="#660000"
-        android:text="Nearby Seekers"
+        android:text="CONFIRM"
         android:textColor="#fff"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="7dp">
 
     </Button>
-
 
 
 </RelativeLayout>

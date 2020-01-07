@@ -37,13 +37,11 @@ import java.util.List;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-public class DirectionActivity extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
+public class DirectionActivity extends FragmentActivity implements OnMapReadyCallback {
     GoogleMap map;
     SupportMapFragment mapFragment;
-    MarkerOptions place1,place2;
-    SearchView searchView;
-    Polyline currentpolyline;
     private FusedLocationProviderClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +53,9 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         client = LocationServices.getFusedLocationProviderClient(this);
 
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdir);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mapFragment.getMapAsync(this);
-
-        place1 = new MarkerOptions().position(new LatLng(23.755044,90.389406)).title("My Location");
-        place2 = new MarkerOptions().position(new LatLng(23.741502,90.375129)).title("Hospital");
-        String url = getUrl(place1.getPosition(),place2.getPosition(),"driving");
-
-        new FetchURL(DirectionActivity.this).execute(url, "driving");
-
     }
 
     @Override
@@ -72,53 +63,87 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
 
         map = googleMap;
 
-        map.addMarker(place1);
-        map.addMarker(place2);
 
-    }
 
-    private String getUrl(LatLng origin, LatLng dest, String directionMode)
-    {
-        String str_origin = "origin" + origin.latitude + "," + origin.longitude;
-        String str_dest = "destination" + dest.latitude + "," + dest.longitude;
-        String mode = "mode=" + directionMode;
-        String parameters = str_origin + "$" + str_dest + "$" + mode;
-        String output = "json";
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.map_key);
-        return url;
 
-    }
-
-    /*private String requestDirection(String requrl)
-    {
-        String responseString = "";
-        InputStream inputStream = null;
-        HttpURLConnection httpURLConnection = null;
         try {
-            URL url = new URL(requrl);
-            httpURLConnection = url.openConnection();
-            httpURLConnection.connect();
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
 
-            inputStream = httpURLConnection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.mapstyledark));
 
-            StringBuffer stringBuffer = new StringBuffer();
-            String line = "";
+            if (!success) {
+                Toast.makeText(this, "Couldn't Connect!", Toast.LENGTH_SHORT).show();
+            }
+            else if(ActivityCompat.checkSelfPermission(DirectionActivity.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
+                return;
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+            }
+            else
+            {
+                client.getLastLocation().addOnSuccessListener(DirectionActivity.this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location!=null)
+                        {
+                            googleMap.setMyLocationEnabled(true);
+                            LatLng latLng = new LatLng(23.746466, 90.376015);
+                            map.addMarker(new MarkerOptions().position(latLng).title("Current Location"));
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
+                        }
+
+                    }
+                });
+            }
+
+        } catch (Resources.NotFoundException e) {
+            Toast.makeText(this, "Check your connection", Toast.LENGTH_SHORT).show();
         }
-    }*/
+
+        /*if(ActivityCompat.checkSelfPermission(MainActivity.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            return;
+
+        }
+        else
+        {
+            client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location!=null)
+                    {
+                        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                        map.addMarker(new MarkerOptions().position(latLng).title("Current Location"));
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,40));
+                    }
+
+                }
+            });
+        }*/
+
+
+        /*client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location!=null)
+                {
+                    LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                    map.addMarker(new MarkerOptions().position(latLng).title("Current LOcation"));
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,40));
+                }
+
+            }
+        });
+        LatLng Dhaka = new LatLng(23.774287, 90.366169);
+        map.addMarker(new MarkerOptions().position(Dhaka).title("Shyamoli"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(Dhaka));*/
+
+    }
     private void requestPermission()
     {
         ActivityCompat.requestPermissions(this,new String[]{ACCESS_FINE_LOCATION},1);
-    }
-
-    @Override
-    public void onTaskDone(Object... values) {
-        if (currentpolyline !=null)
-            currentpolyline.remove();
-        currentpolyline = map.addPolyline((PolylineOptions) values[0]);
     }
 }
