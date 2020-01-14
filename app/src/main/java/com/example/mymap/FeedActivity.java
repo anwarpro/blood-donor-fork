@@ -45,7 +45,7 @@ public class FeedActivity extends AppCompatActivity {
                 Feed feed = feedList.get(i);
                 Intent intent = new Intent(FeedActivity.this,PopupActivity.class);
                 intent.putExtra(FEED_NAME,feed.getFeedName());
-                intent.putExtra(FEED_PHONE,feed.getFeedPhone());
+                intent.putExtra(FEED_PHONE, feed.getFeedPhone());
                 startActivity(intent);
             }
         });

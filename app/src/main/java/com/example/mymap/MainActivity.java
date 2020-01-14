@@ -1,19 +1,27 @@
 package com.example.mymap;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,11 +31,19 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -39,14 +55,18 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
     GoogleMap map;
     SupportMapFragment mapFragment;
     SearchView searchView;
+    DatabaseReference databaseReference;
     Button btnpat;
+    Spinner spinnermain;
     private FusedLocationProviderClient client;
+    private Marker MyMarker;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        databaseReference = FirebaseDatabase.getInstance().getReference("feed");
 
         requestPermission();
 
@@ -57,15 +77,89 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
         searchView = findViewById(R.id.sv_location);
         btnpat = findViewById(R.id.btnmppat);
-        btnpat.setOnClickListener(new View.OnClickListener() {
+        spinnermain = findViewById(R.id.spinnermapbg);
+
+        spinnermain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                btnpat.setVisibility(View.GONE);
-                LatLng latLng = new LatLng(23.7561,90.3872);
-                map.addMarker(new MarkerOptions().position(latLng).title("Evan"));
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selected_group = spinnermain.getSelectedItem().toString();
+
+                Query query1 = FirebaseDatabase.getInstance().getReference("feed")
+                        .orderByChild("feedBlood")
+                        .equalTo(selected_group);
+                query1.addListenerForSingleValueEvent(
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                map.clear();
+                                for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
+                                {
+                                    Feed feed = userSnapshot.getValue(Feed.class);
+                                    Double l1 = Double.parseDouble(feed.getFeedLocation());
+                                    Double l2 = Double.parseDouble(feed.getFeedLocation2());
+                                    String name = feed.getFeedName();
+                                    String phone = feed.getFeedPhone();
+                                    String blood = feed.getFeedBlood();
+
+
+                                    MyMarker = map.addMarker(new MarkerOptions()
+                                            .position(new LatLng(l1, l2))
+                                            .title(name)
+                                            .snippet(phone)
+                                            .icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_bddd)));
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        })
+                );
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                String selected_group = spinnermain.getSelectedItem().toString();
+                Query query1 = FirebaseDatabase.getInstance().getReference("feed")
+                        .orderByChild("feedBlood")
+                        .equalTo("A+");
+                query1.addListenerForSingleValueEvent(
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                map.clear();
+                                for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
+                                {
+                                    Feed feed = userSnapshot.getValue(Feed.class);
+                                    Double l1 = Double.parseDouble(feed.getFeedLocation());
+                                    Double l2 = Double.parseDouble(feed.getFeedLocation2());
+                                    String name = feed.getFeedName();
+                                    String phone = feed.getFeedPhone();
+                                    String blood = feed.getFeedBlood();
+
+
+                                    MyMarker = map.addMarker(new MarkerOptions()
+                                            .position(new LatLng(l1, l2))
+                                            .title(name)
+                                            .snippet(phone)
+                                            .icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_bddd)));
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        })
+                );
+
             }
         });
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -82,7 +176,6 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                     }
                     Address address = addressList.get(0);
                     LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
-                    map.addMarker(new MarkerOptions().position(latLng).title(location));
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
 
                 }
@@ -130,8 +223,48 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                         if (location!=null)
                         {
                             googleMap.setMyLocationEnabled(true);
-                            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
+                            final LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
+                            btnpat.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    btnpat.setVisibility(View.GONE);
+                                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+
+
+
+                                    //here
+
+
+                                    databaseReference.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot feedSnapshot : dataSnapshot.getChildren())
+                                            {
+                                                Feed feed = feedSnapshot.getValue(Feed.class);
+                                                Double l1 = Double.parseDouble(feed.getFeedLocation());
+                                                Double l2 = Double.parseDouble(feed.getFeedLocation2());
+                                                String name = feed.getFeedName();
+                                                String phone = feed.getFeedPhone();
+                                                String blood = feed.getFeedBlood();
+
+                                                googleMap.addMarker(new MarkerOptions()
+                                                        .position(new LatLng(l1, l2))
+                                                        .title(name)
+                                                        .snippet(phone)
+                                                        .icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_bddd)));
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+
+                                }
+                            });
                         }
 
                     }
@@ -179,6 +312,16 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
         LatLng Dhaka = new LatLng(23.774287, 90.366169);
         map.addMarker(new MarkerOptions().position(Dhaka).title("Shyamoli"));
         map.moveCamera(CameraUpdateFactory.newLatLng(Dhaka));*/
+
+    }
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId)
+    {
+        Drawable vectorDrawable= ContextCompat.getDrawable(context, vectorResId);
+        vectorDrawable.setBounds(0,0,vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),vectorDrawable.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
 
     }
     private void requestPermission()

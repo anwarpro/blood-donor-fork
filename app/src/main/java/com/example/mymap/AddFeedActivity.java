@@ -1,5 +1,6 @@
 package com.example.mymap;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +24,7 @@ public class AddFeedActivity extends AppCompatActivity {
     Button btnPost,btnLoc;
     DatabaseReference databaseReference;
     Spinner spinneraddarea;
+    TextView txtloc1,txtloc2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +46,20 @@ public class AddFeedActivity extends AppCompatActivity {
         txtdate = findViewById(R.id.txt_feeddate);
         txthosp = findViewById(R.id.txt_feedhosp);
         btnLoc = findViewById(R.id.btnaddloc);
+        txtloc1 = findViewById(R.id.txtvlocation1);
+        txtloc2 = findViewById(R.id.txtvlocation2);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddFeedActivity.this,R.layout.custom_spinner,getResources().getStringArray(R.array.blood_area));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinneraddarea.setAdapter(myAdapter);
+
+        ArrayAdapter<String> myAdapter1 = new ArrayAdapter<String>(AddFeedActivity.this,R.layout.custom_spinner,getResources().getStringArray(R.array.blood_sort));
+        myAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBlood.setAdapter(myAdapter1);
+
+        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(AddFeedActivity.this,R.layout.custom_spinner,getResources().getStringArray(R.array.blood_bag));
+        myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBag.setAdapter(myAdapter2);
 
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,11 +72,28 @@ public class AddFeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddFeedActivity.this,AddLocationActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                txtloc1.setText(data.getStringExtra("location1"));
+                txtloc2.setText(data.getStringExtra("location2"));
+                btnLoc.setText("added");
+
+
+            }
+        }
     }
 
     private void addFeed()
@@ -75,10 +105,12 @@ public class AddFeedActivity extends AppCompatActivity {
         String hosp = txthosp.getText().toString().trim();
         String bloodgrp = spinnerBlood.getSelectedItem().toString();
         String bloodbag = spinnerBag.getSelectedItem().toString();
-        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(date))
+        String location = txtloc1.getText().toString();
+        String location2 = txtloc2.getText().toString();
+        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(date) && !location.equals("latitude") && !location2.equals("longitude"))
         {
             String id = databaseReference.push().getKey();
-            Feed feed = new Feed(id,name,address,bloodgrp,phone,bloodbag,date,hosp);
+            Feed feed = new Feed(id,name,address,bloodgrp,phone,bloodbag,date,hosp,location,location2);
             databaseReference.child(id).setValue(feed);
             Toast.makeText(this, "Posted", Toast.LENGTH_SHORT).show();
             AddFeedActivity.this.finish();
@@ -86,7 +118,7 @@ public class AddFeedActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "Fields are Empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Fill all the sections and add location", Toast.LENGTH_SHORT).show();
         }
     }
 }

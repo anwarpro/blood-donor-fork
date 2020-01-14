@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Address;
@@ -46,6 +47,7 @@ public class AddLocationActivity extends FragmentActivity implements OnMapReadyC
         setContentView(R.layout.activity_add_location);
 
         requestPermission();
+        Intent intent = getIntent();
 
         client = LocationServices.getFusedLocationProviderClient(this);
 
@@ -54,16 +56,11 @@ public class AddLocationActivity extends FragmentActivity implements OnMapReadyC
         mapFragment.getMapAsync(this);
         searchView = findViewById(R.id.sv_location);
         btncon = findViewById(R.id.btnconloc);
-        btncon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddLocationActivity.this.finish();
-            }
-        });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                String location = searchView.getQuery().toString();
+                final String location = searchView.getQuery().toString();
                 List<Address> addressList = null;
 
                 if(location!=null || !location.equals(""))
@@ -75,7 +72,7 @@ public class AddLocationActivity extends FragmentActivity implements OnMapReadyC
                         e.printStackTrace();
                     }
                     Address address = addressList.get(0);
-                    LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
+                    final LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
                     map.addMarker(new MarkerOptions().position(latLng).title(location));
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
 
@@ -90,6 +87,8 @@ public class AddLocationActivity extends FragmentActivity implements OnMapReadyC
         });
 
         mapFragment.getMapAsync(this);
+
+
     }
 
     @Override
@@ -124,16 +123,30 @@ public class AddLocationActivity extends FragmentActivity implements OnMapReadyC
                         {
                             googleMap.setMyLocationEnabled(true);
                             LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-                            map.addMarker(new MarkerOptions().position(latLng).title("Current Location"));
                             map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                                 @Override
-                                public void onMapClick(LatLng latLng) {
+                                public void onMapClick(final LatLng latLng) {
                                     MarkerOptions markerOptions = new MarkerOptions();
                                     markerOptions.position(latLng);
                                     markerOptions.title(latLng.latitude+" : " + latLng.longitude);
                                     map.clear();
                                     map.addMarker(markerOptions);
                                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
+                                    btncon.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent l = new Intent();
+                                            Double l1 = latLng.latitude;
+                                            Double l2 = latLng.longitude;
+                                            String c1 = l1.toString();
+                                            String c2 = l2.toString();
+
+                                            l.putExtra("location1", c1);
+                                            l.putExtra("location2", c2);
+                                            setResult(RESULT_OK, l);
+                                            finish();
+                                        }
+                                    });
 
                                 }
                             });
