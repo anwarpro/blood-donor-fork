@@ -19,6 +19,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -60,6 +61,7 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
     Spinner spinnermain;
     private FusedLocationProviderClient client;
     private Marker MyMarker;
+    TextView tv1,tv2,tv3;
 
 
     @Override
@@ -79,82 +81,149 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
         btnpat = findViewById(R.id.btnmppat);
         spinnermain = findViewById(R.id.spinnermapbg);
 
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(MainActivity.this,R.layout.custom_spinner_for_map,getResources().getStringArray(R.array.blood_group));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnermain.setAdapter(myAdapter);
+        tv1 = findViewById(R.id.tv1);
+        tv2 = findViewById(R.id.tv2);
+        tv3 = findViewById(R.id.tv3);
+
         spinnermain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selected_group = spinnermain.getSelectedItem().toString();
 
-                Query query1 = FirebaseDatabase.getInstance().getReference("feed")
-                        .orderByChild("feedBlood")
-                        .equalTo(selected_group);
-                query1.addListenerForSingleValueEvent(
-                        databaseReference.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                map.clear();
-                                for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
-                                {
-                                    Feed feed = userSnapshot.getValue(Feed.class);
-                                    Double l1 = Double.parseDouble(feed.getFeedLocation());
-                                    Double l2 = Double.parseDouble(feed.getFeedLocation2());
-                                    String name = feed.getFeedName();
-                                    String phone = feed.getFeedPhone();
-                                    String blood = feed.getFeedBlood();
+                if (selected_group.equals("All"))
+                {
+                    databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot feedSnapshot : dataSnapshot.getChildren())
+                            {
+                                Feed feed = feedSnapshot.getValue(Feed.class);
+                                Double l1 = Double.parseDouble(feed.getFeedLocation());
+                                Double l2 = Double.parseDouble(feed.getFeedLocation2());
+                                String name = feed.getFeedName();
+                                String phone = feed.getFeedPhone();
+                                String blood = feed.getFeedBlood();
+                                tv1.setText(name);
+                                tv2.setText(blood);
+                                tv3.setText(phone);
 
 
-                                    MyMarker = map.addMarker(new MarkerOptions()
-                                            .position(new LatLng(l1, l2))
-                                            .title(name)
-                                            .snippet(phone)
-                                            .icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_bddd)));
+                                map.addMarker(new MarkerOptions()
+                                        .position(new LatLng(l1, l2))
+                                        .title(name)
+                                        .snippet(blood)
+                                        .icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_bddd)));
+
+                                map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                                    @Override
+                                    public View getInfoWindow(Marker marker) {
+                                        return null;
+                                    }
+
+                                    @Override
+                                    public View getInfoContents(Marker marker) {
+
+                                        View v = getLayoutInflater().inflate(R.layout.info_window, null);
+
+                                        TextView tvname = v.findViewById(R.id.tv_name);
+                                        TextView tvblood = v.findViewById(R.id.tv_bg);
+                                        TextView tvphone = v.findViewById(R.id.tv_phone);
+                                        String m = marker.getTitle();
+                                        String m2 = marker.getSnippet();
+                                        tvname.setText(m);
+                                        tvblood.setText(m2);
+                                        return v;
+                                    }
+                                });
+
+                                map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                                    @Override
+                                    public void onInfoWindowClick(Marker marker) {
+                                        Toast.makeText(MainActivity.this, "Make a Call.", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+                else {
+
+                    Query query1 = FirebaseDatabase.getInstance().getReference("feed")
+                            .orderByChild("feedBlood")
+                            .equalTo(selected_group);
+                    query1.addListenerForSingleValueEvent(
+                            databaseReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    map.clear();
+                                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                        Feed feed = userSnapshot.getValue(Feed.class);
+                                        Double l1 = Double.parseDouble(feed.getFeedLocation());
+                                        Double l2 = Double.parseDouble(feed.getFeedLocation2());
+                                        String name = feed.getFeedName();
+                                        String phone = feed.getFeedPhone();
+                                        String blood = feed.getFeedBlood();
+
+
+                                        MyMarker = map.addMarker(new MarkerOptions()
+                                                .position(new LatLng(l1, l2))
+                                                .title(name)
+                                                .snippet(phone)
+                                                .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_bddd)));
+
+                                        map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                                            @Override
+                                            public View getInfoWindow(Marker marker) {
+                                                return null;
+                                            }
+
+                                            @Override
+                                            public View getInfoContents(Marker marker) {
+
+                                                View v = getLayoutInflater().inflate(R.layout.info_window, null);
+
+                                                TextView tvname = v.findViewById(R.id.tv_name);
+                                                TextView tvblood = v.findViewById(R.id.tv_bg);
+                                                TextView tvphone = v.findViewById(R.id.tv_phone);
+                                                String m = marker.getTitle();
+                                                String m2 = marker.getSnippet();
+                                                tvname.setText(m);
+                                                tvblood.setText(m2);
+                                                return v;
+                                            }
+                                        });
+
+                                        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                                            @Override
+                                            public void onInfoWindowClick(Marker marker) {
+                                                Toast.makeText(MainActivity.this, "Make a Call.", Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                    }
+
                                 }
 
-                            }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        })
-                );
+                                }
+                            })
+                    );
+                }
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                String selected_group = spinnermain.getSelectedItem().toString();
-                Query query1 = FirebaseDatabase.getInstance().getReference("feed")
-                        .orderByChild("feedBlood")
-                        .equalTo("A+");
-                query1.addListenerForSingleValueEvent(
-                        databaseReference.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                map.clear();
-                                for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
-                                {
-                                    Feed feed = userSnapshot.getValue(Feed.class);
-                                    Double l1 = Double.parseDouble(feed.getFeedLocation());
-                                    Double l2 = Double.parseDouble(feed.getFeedLocation2());
-                                    String name = feed.getFeedName();
-                                    String phone = feed.getFeedPhone();
-                                    String blood = feed.getFeedBlood();
-
-
-                                    MyMarker = map.addMarker(new MarkerOptions()
-                                            .position(new LatLng(l1, l2))
-                                            .title(name)
-                                            .snippet(phone)
-                                            .icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_bddd)));
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        })
-                );
 
             }
         });
@@ -236,6 +305,7 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                                     //here
 
 
+
                                     databaseReference.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -247,12 +317,45 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                                                 String name = feed.getFeedName();
                                                 String phone = feed.getFeedPhone();
                                                 String blood = feed.getFeedBlood();
+                                                tv1.setText(name);
+                                                tv2.setText(blood);
+                                                tv3.setText(phone);
+
 
                                                 googleMap.addMarker(new MarkerOptions()
                                                         .position(new LatLng(l1, l2))
                                                         .title(name)
-                                                        .snippet(phone)
+                                                        .snippet(blood)
                                                         .icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_bddd)));
+
+                                                googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                                                    @Override
+                                                    public View getInfoWindow(Marker marker) {
+                                                        return null;
+                                                    }
+
+                                                    @Override
+                                                    public View getInfoContents(Marker marker) {
+
+                                                        View v = getLayoutInflater().inflate(R.layout.info_window, null);
+
+                                                        TextView tvname = v.findViewById(R.id.tv_name);
+                                                        TextView tvblood = v.findViewById(R.id.tv_bg);
+                                                        TextView tvphone = v.findViewById(R.id.tv_phone);
+                                                        String m = marker.getTitle();
+                                                        String m2 = marker.getSnippet();
+                                                        tvname.setText(m);
+                                                        tvblood.setText(m2);
+                                                        return v;
+                                                    }
+                                                });
+
+                                                googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                                                    @Override
+                                                    public void onInfoWindowClick(Marker marker) {
+                                                        Toast.makeText(MainActivity.this, "Make a Call.", Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
                                             }
                                         }
 

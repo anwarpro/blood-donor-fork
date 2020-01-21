@@ -16,7 +16,6 @@
     </fragment>
 
     <SearchView
-
         android:id="@+id/sv_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +26,6 @@
         android:queryHint="Search.."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/map">
-
     </SearchView>
 
     <Button
@@ -49,18 +47,38 @@
 
     <Spinner
         android:id="@+id/spinnermapbg"
-        android:layout_width="98dp"
-        android:layout_height="61dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/sv_location"
         android:layout_alignEnd="@+id/map"
         android:layout_gravity="end"
         android:layout_marginTop="28dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_round"
         android:layout_marginEnd="15dp"
         android:layout_marginRight="10dp"
         android:entries="@array/blood_group"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
     </Spinner>
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+    </TextView>
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+    </TextView>
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+    </TextView>
 
 
 </RelativeLayout>

@@ -49,7 +49,7 @@ public class AddFeedActivity extends AppCompatActivity {
         txtloc1 = findViewById(R.id.txtvlocation1);
         txtloc2 = findViewById(R.id.txtvlocation2);
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddFeedActivity.this,R.layout.custom_spinner,getResources().getStringArray(R.array.blood_area));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddFeedActivity.this,R.layout.custom_spinner_for_area,getResources().getStringArray(R.array.blood_area));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinneraddarea.setAdapter(myAdapter);
 
@@ -107,7 +107,7 @@ public class AddFeedActivity extends AppCompatActivity {
         String bloodbag = spinnerBag.getSelectedItem().toString();
         String location = txtloc1.getText().toString();
         String location2 = txtloc2.getText().toString();
-        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(date) && !location.equals("latitude") && !location2.equals("longitude"))
+        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(date) && !location.equals("latitude") && !location2.equals("longitude") && !address.equals("Select Area"))
         {
             String id = databaseReference.push().getKey();
             Feed feed = new Feed(id,name,address,bloodgrp,phone,bloodbag,date,hosp,location,location2);
@@ -118,7 +118,7 @@ public class AddFeedActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "Fill all the sections and add location", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill all the required fields and add a location.", Toast.LENGTH_LONG).show();
         }
     }
 }

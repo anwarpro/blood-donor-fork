@@ -17,6 +17,9 @@
 
     <string-array name="blood_group">
         <item>
+            All
+        </item>
+        <item>
             A+
         </item>
         <item>
@@ -65,17 +68,11 @@
         <item>
             7
         </item>
-        <item>
-            8
-        </item>
-        <item>
-            9
-        </item>
-        <item>
-            10
-        </item>
     </string-array>
     <string-array name="blood_sort">
+        <item>
+            All
+        </item>
         <item>
             A+
         </item>
@@ -103,6 +100,9 @@
     </string-array>
     <string-array name="blood_area">
         <item>
+            Select Area
+        </item>
+        <item>
             Adabar
         </item>
         <item>
@@ -119,6 +119,9 @@
         </item>
         <item>
             Demra
+        </item>
+        <item>
+            Farmgate
         </item>
         <item>
             Gulshan
