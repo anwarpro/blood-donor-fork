@@ -8,11 +8,11 @@
     tools:context=".FeedActivity">
 
     <ListView
+        android:id="@+id/listviewfeed"
         android:layout_width="match_parent"
         android:padding="8dp"
         android:background="@drawable/bgf"
         android:layout_height="match_parent"
-        android:id="@+id/listviewfeed"
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp"/>
 

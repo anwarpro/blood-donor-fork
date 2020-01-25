@@ -440,6 +440,34 @@
 
             </TextView>
 
+            <TextView
+                android:id="@+id/textViewdc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="25dp"
+                android:paddingTop="15dp"
+                android:textColor="#fff"
+                android:textAlignment="center"
+                android:text="\nCalculating..."
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewsc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="25dp"
+                android:textColor="#fff"
+                android:textAlignment="center"
+                android:paddingTop="15dp"
+                android:text="\nCalculating..."
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

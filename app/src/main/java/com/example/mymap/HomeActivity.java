@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -52,12 +53,18 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class HomeActivity extends AppCompatActivity {
     CardView donor,map,feed,bed,hospital,bank,profile,about,group;
+    DatabaseReference databaseReference,dbd;
+    TextView tvd,tvr;
+    private int countd,countr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().setTitle("Blood Donor App");
+        databaseReference = FirebaseDatabase.getInstance().getReference("feed");
+        dbd = FirebaseDatabase.getInstance().getReference("users");
+
 
 
         feed = findViewById(R.id.feedcard);
@@ -69,6 +76,43 @@ public class HomeActivity extends AppCompatActivity {
         about = findViewById(R.id.aboutcard);
         donor = findViewById(R.id.donorcard);
         group = findViewById(R.id.groupcard);
+        tvd = findViewById(R.id.textViewdc);
+        tvr = findViewById(R.id.textViewsc);
+
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists())
+                {
+                    countr = (int) dataSnapshot.getChildrenCount();
+                    tvr.setText(Integer.toString(countr) +"\n"+ "Requests");
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        dbd.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists())
+                {
+                    countd = (int) dataSnapshot.getChildrenCount();
+                    tvd.setText(Integer.toString(countd)+"\n"+"Donors");
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         donor.setOnClickListener(new View.OnClickListener() {
             @Override

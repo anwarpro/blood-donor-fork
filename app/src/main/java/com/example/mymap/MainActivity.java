@@ -177,7 +177,7 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                                         MyMarker = map.addMarker(new MarkerOptions()
                                                 .position(new LatLng(l1, l2))
                                                 .title(name)
-                                                .snippet(phone)
+                                                .snippet(blood)
                                                 .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_bddd)));
 
                                         map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {

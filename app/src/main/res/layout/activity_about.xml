@@ -1,186 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bgf"
-    android:orientation="vertical"
     tools:context=".AboutActivity">
 
-
-    <RelativeLayout
+    <WebView
+        android:id="@+id/webviewport"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:background="#fff"
-        android:padding="6dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageabout"
-            android:layout_width="405dp"
-            android:layout_height="196dp"
-            android:background="#fff"
-            android:src="@drawable/aboutimage">
+    </WebView>
 
-        </ImageView>
-
-        <TextView
-            android:id="@+id/aboutname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageabout"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/whitebackground"
-            android:text="Emran Khandaker Evan"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:textStyle="bold">
-
-        </TextView>
-        <RelativeLayout
-            android:id="@+id/aboutme"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_below="@+id/aboutname"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/whitebackground"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:textStyle="bold">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:text="about me"
-                android:textSize="22sp"
-                android:textStyle="italic"
-                android:textAlignment="center">
-
-            </TextView>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/aboutme"
-            android:layout_marginLeft="30dp"
-            android:backgroundTint="#fff"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/whitebackground"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:textStyle="bold">
-
-            <ImageView
-                android:id="@+id/imgsocial"
-                android:layout_width="wrap_content"
-                android:layout_height="176dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="14dp"
-                android:src="@drawable/socialdemo">
-
-            </ImageView>
-
-            <TextView
-                android:id="@+id/abtfb"
-                android:layout_width="165dp"
-                android:layout_height="29dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:text="emranevan"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="121dp"
-                android:layout_toEndOf="@+id/imgsocial">
-
-            </TextView>
-
-            <TextView
-                android:id="@+id/abttt"
-                android:layout_width="165dp"
-                android:layout_height="29dp"
-                android:layout_below="@+id/abtfb"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:text="evanemran"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="7dp"
-                android:layout_marginEnd="118dp"
-                android:layout_toEndOf="@+id/imgsocial">
-
-            </TextView>
-
-            <TextView
-                android:id="@+id/abtgt"
-                android:layout_width="165dp"
-                android:layout_height="29dp"
-                android:layout_below="@+id/abttt"
-                android:layout_alignParentEnd="true"
-                android:text="evanemran"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginEnd="118dp"
-                android:layout_toEndOf="@+id/imgsocial">
-
-            </TextView>
-
-            <TextView
-                android:id="@+id/abtin"
-                android:layout_width="165dp"
-                android:layout_height="29dp"
-                android:layout_below="@+id/abtgt"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:text="evanemran"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="7dp"
-                android:layout_marginEnd="119dp"
-                android:layout_toEndOf="@+id/imgsocial">
-
-            </TextView>
-
-            <TextView
-                android:layout_width="165dp"
-                android:layout_height="29dp"
-                android:layout_below="@+id/abtin"
-                android:text="evanemran"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="119dp"
-                android:layout_toEndOf="@+id/imgsocial">
-
-            </TextView>
-
-        </RelativeLayout>
-
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

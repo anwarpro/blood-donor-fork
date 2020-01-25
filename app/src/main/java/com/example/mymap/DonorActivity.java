@@ -112,30 +112,24 @@ public class DonorActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                String selected_group = spinner.getSelectedItem().toString();
-                Query query1 = FirebaseDatabase.getInstance().getReference("users")
-                        .orderByChild("userBlood")
-                        .equalTo("A+");
-                query1.addListenerForSingleValueEvent(
-                        databaseReference.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                userList.clear();
-                                for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
-                                {
-                                    User user = userSnapshot.getValue(User.class);
-                                    userList.add(user);
-                                }
-                                UserList adapter = new UserList(DonorActivity.this,userList);
-                                listView.setAdapter(adapter);
-                            }
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        userList.clear();
+                        for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
+                        {
+                            User user = userSnapshot.getValue(User.class);
+                            userList.add(user);
+                        }
+                        UserList adapter = new UserList(DonorActivity.this,userList);
+                        listView.setAdapter(adapter);
+                    }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            }
-                        })
-                );
+                    }
+                });
 
             }
         });
@@ -173,29 +167,23 @@ public class DonorActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        String selected_group = spinner.getSelectedItem().toString();
-        Query query1 = FirebaseDatabase.getInstance().getReference("users")
-                .orderByChild("userBlood")
-                .equalTo("A+");
-        query1.addListenerForSingleValueEvent(
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        userList.clear();
-                        for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
-                        {
-                            User user = userSnapshot.getValue(User.class);
-                            userList.add(user);
-                        }
-                        UserList adapter = new UserList(DonorActivity.this,userList);
-                        listView.setAdapter(adapter);
-                    }
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userList.clear();
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
+                {
+                    User user = userSnapshot.getValue(User.class);
+                    userList.add(user);
+                }
+                UserList adapter = new UserList(DonorActivity.this,userList);
+                listView.setAdapter(adapter);
+            }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                })
-        );
+            }
+        });
     }
 }
