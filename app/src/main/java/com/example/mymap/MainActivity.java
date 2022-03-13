@@ -1,12 +1,7 @@
 package com.example.mymap;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -25,6 +20,11 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -49,9 +49,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.IOException;
 import java.util.List;
 
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-
-public class MainActivity  extends FragmentActivity implements OnMapReadyCallback {
+public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
 
     GoogleMap map;
     SupportMapFragment mapFragment;
@@ -61,14 +59,14 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
     Spinner spinnermain;
     private FusedLocationProviderClient client;
     private Marker MyMarker;
-    TextView tv1,tv2,tv3;
+    TextView tv1, tv2, tv3;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("feed");
+        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("feed");
 
         requestPermission();
 
@@ -81,7 +79,7 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
         btnpat = findViewById(R.id.btnmppat);
         spinnermain = findViewById(R.id.spinnermapbg);
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(MainActivity.this,R.layout.custom_spinner_for_map,getResources().getStringArray(R.array.blood_group));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(MainActivity.this, R.layout.custom_spinner_for_map, getResources().getStringArray(R.array.blood_group));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnermain.setAdapter(myAdapter);
         tv1 = findViewById(R.id.tv1);
@@ -93,13 +91,11 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selected_group = spinnermain.getSelectedItem().toString();
 
-                if (selected_group.equals("All"))
-                {
+                if (selected_group.equals("All")) {
                     databaseReference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot feedSnapshot : dataSnapshot.getChildren())
-                            {
+                            for (DataSnapshot feedSnapshot : dataSnapshot.getChildren()) {
                                 Feed feed = feedSnapshot.getValue(Feed.class);
                                 Double l1 = Double.parseDouble(feed.getFeedLocation());
                                 Double l2 = Double.parseDouble(feed.getFeedLocation2());
@@ -115,7 +111,7 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                                         .position(new LatLng(l1, l2))
                                         .title(name)
                                         .snippet(blood)
-                                        .icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_bddd)));
+                                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_bddd)));
 
                                 map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                                     @Override
@@ -154,10 +150,9 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                         }
                     });
 
-                }
-                else {
+                } else {
 
-                    Query query1 = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("feed")
+                    Query query1 = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("feed")
                             .orderByChild("feedBlood")
                             .equalTo(selected_group);
                     query1.addListenerForSingleValueEvent(
@@ -235,8 +230,7 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                 String location = searchView.getQuery().toString();
                 List<Address> addressList = null;
 
-                if(location!=null || !location.equals(""))
-                {
+                if (location != null || !location.equals("")) {
                     Geocoder geocoder = new Geocoder(MainActivity.this);
                     try {
                         addressList = geocoder.getFromLocationName(location, 1);
@@ -244,8 +238,8 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                         e.printStackTrace();
                     }
                     Address address = addressList.get(0);
-                    LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
                 }
                 return false;
@@ -276,34 +270,28 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
 
             if (!success) {
                 Toast.makeText(this, "Couldn't Connect!", Toast.LENGTH_SHORT).show();
-            }
-            else if(ActivityCompat.checkSelfPermission(MainActivity.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            {
+            } else if (ActivityCompat.checkSelfPermission(MainActivity.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
 
-            }
-            else
-            {
+            } else {
                 client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
-                        if (location!=null)
-                        {
+                        if (location != null) {
                             googleMap.setMyLocationEnabled(true);
-                            final LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
+                            final LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
                             btnpat.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
                                     btnpat.setVisibility(View.GONE);
-                                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+                                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
 
                                     databaseReference.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            for (DataSnapshot feedSnapshot : dataSnapshot.getChildren())
-                                            {
+                                            for (DataSnapshot feedSnapshot : dataSnapshot.getChildren()) {
                                                 Feed feed = feedSnapshot.getValue(Feed.class);
                                                 Double l1 = Double.parseDouble(feed.getFeedLocation());
                                                 Double l2 = Double.parseDouble(feed.getFeedLocation2());
@@ -319,7 +307,7 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                                                         .position(new LatLng(l1, l2))
                                                         .title(name)
                                                         .snippet(blood)
-                                                        .icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.ic_bddd)));
+                                                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_bddd)));
 
                                                 googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                                                     @Override
@@ -410,18 +398,18 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
         map.moveCamera(CameraUpdateFactory.newLatLng(Dhaka));*/
 
     }
-    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId)
-    {
-        Drawable vectorDrawable= ContextCompat.getDrawable(context, vectorResId);
-        vectorDrawable.setBounds(0,0,vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
-        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),vectorDrawable.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
+
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
 
     }
-    private void requestPermission()
-    {
-        ActivityCompat.requestPermissions(this,new String[]{ACCESS_FINE_LOCATION},1);
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, 1);
     }
 }

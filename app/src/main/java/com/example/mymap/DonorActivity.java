@@ -81,7 +81,7 @@ public class DonorActivity extends AppCompatActivity {
                     });
                 } else {
 
-                    Query query1 = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("users")
+                    Query query1 = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users")
                             .orderByChild("userBlood")
                             .equalTo(selected_group);
                     query1.addListenerForSingleValueEvent(
@@ -141,7 +141,7 @@ public class DonorActivity extends AppCompatActivity {
             }
         });
 
-        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("users");
+        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
 
 
         listView = (ListView) findViewById(R.id.listViewUsers);

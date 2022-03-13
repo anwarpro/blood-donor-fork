@@ -1,13 +1,13 @@
 package com.example.mymap;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AdminActivity extends AppCompatActivity {
     EditText adminname,adminpass;
@@ -29,7 +29,7 @@ public class AdminActivity extends AppCompatActivity {
                 {
                     Toast.makeText(AdminActivity.this, "Enter Credentials", Toast.LENGTH_SHORT).show();
                 }
-                else if (adminname.getText().toString().trim().equals("evan") && adminpass.getText().toString().trim().equals("02198"))
+                else if (adminname.getText().toString().trim().equals("admin") && adminpass.getText().toString().trim().equals("123456"))
                 {
                     Intent intent = new Intent(AdminActivity.this,AddByAdmin.class);
                     startActivity(intent);

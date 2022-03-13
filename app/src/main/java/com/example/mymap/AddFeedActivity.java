@@ -34,7 +34,7 @@ public class AddFeedActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Add Request");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("feed");
+        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("feed");
 
 
         txtName = findViewById(R.id.txt_feedname);

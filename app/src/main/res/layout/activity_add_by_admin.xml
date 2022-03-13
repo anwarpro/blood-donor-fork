@@ -1,151 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/bgf"
     android:layout_height="match_parent"
+    android:background="@drawable/bgf"
+    android:fillViewport="true"
     tools:context=".AddByAdmin">
 
-    <TextView
-        android:id="@+id/txtaddhospital"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#660000"
-        android:layout_marginTop="50dp"
-        android:text="Add Hospital"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-    </TextView>
+        <TextView
+            android:id="@+id/txtaddhospital"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="50dp"
+            android:background="#660000"
+            android:text="Add Hospital"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
         <EditText
             android:id="@+id/txthospitalname"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
-            android:inputType="textPersonName"
-            android:textSize="18sp"
-            android:textColor="#fff"
-            android:textAlignment="center"
             android:hint="Hospital Name"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#fff"
             android:textColorHint="#fff"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@+id/txtaddhospital">
 
         </EditText>
-    <EditText
-        android:id="@+id/txthospitaladdress"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:inputType="textPersonName"
-        android:textColor="#fff"
-        android:textAlignment="center"
-        android:hint="Hospital Address"
-        android:textColorHint="#fff"
-        app:layout_constraintTop_toBottomOf="@+id/txthospitalname">
 
-    </EditText>
-    <EditText
-        android:id="@+id/txthospitalphone"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:inputType="phone"
-        android:textColor="#fff"
-        android:textAlignment="center"
-        android:hint="Hospital Phone"
-        android:textColorHint="#fff"
-        app:layout_constraintTop_toBottomOf="@+id/txthospitaladdress">
+        <EditText
+            android:id="@+id/txthospitaladdress"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:hint="Hospital Address"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/txthospitalname">
 
-    </EditText>
+        </EditText>
 
-    <Button
-        android:id="@+id/btnaddhospital"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_design_signup"
-        android:text="Add"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txthospitalphone">
+        <EditText
+            android:id="@+id/txthospitalphone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:hint="Hospital Phone"
+            android:inputType="phone"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/txthospitaladdress">
 
-    </Button>
+        </EditText>
+
+        <Button
+            android:id="@+id/btnaddhospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_design_signup"
+            android:text="Add"
+            android:textColor="#fff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txthospitalphone">
+
+        </Button>
 
 
-    <TextView
-        android:id="@+id/txtaddbank"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#660000"
-        android:layout_marginTop="50dp"
-        android:text="Add Blood Bank"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/btnaddhospital">
+        <TextView
+            android:id="@+id/txtaddbank"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="50dp"
+            android:background="#660000"
+            android:text="Add Blood Bank"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/btnaddhospital">
 
-    </TextView>
-    <EditText
-        android:id="@+id/txtbankname"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:inputType="textPersonName"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:textColor="#fff"
-        android:textAlignment="center"
-        android:hint="Bank Name"
-        android:textColorHint="#fff"
-        app:layout_constraintTop_toBottomOf="@+id/txtaddbank">
+        </TextView>
 
-    </EditText>
-    <EditText
-        android:id="@+id/txtbankaddress"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:inputType="textPersonName"
-        android:textSize="18sp"
-        android:textColor="#fff"
-        android:textAlignment="center"
-        android:hint="Bank Address"
-        android:textColorHint="#fff"
-        app:layout_constraintTop_toBottomOf="@+id/txtbankname">
+        <EditText
+            android:id="@+id/txtbankname"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:hint="Bank Name"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/txtaddbank">
 
-    </EditText>
-    <EditText
-        android:id="@+id/txtbankphone"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:textColor="#fff"
-        android:inputType="phone"
-        android:textAlignment="center"
-        android:hint="Bank Phone"
-        android:textColorHint="#fff"
-        app:layout_constraintTop_toBottomOf="@+id/txtbankaddress">
+        </EditText>
 
-    </EditText>
+        <EditText
+            android:id="@+id/txtbankaddress"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:hint="Bank Address"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/txtbankname">
 
-    <Button
-        android:id="@+id/btnaddbank"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_design_signup"
-        android:text="Add"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtbankphone">
+        </EditText>
 
-    </Button>
+        <EditText
+            android:id="@+id/txtbankphone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:hint="Bank Phone"
+            android:inputType="phone"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/txtbankaddress">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </EditText>
+
+        <Button
+            android:id="@+id/btnaddbank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_design_signup"
+            android:text="Add"
+            android:textColor="#fff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtbankphone">
+
+        </Button>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

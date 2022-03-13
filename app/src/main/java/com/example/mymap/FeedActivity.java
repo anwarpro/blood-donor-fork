@@ -36,7 +36,7 @@ public class FeedActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Requests For Blood");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("feed");
+        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("feed");
         listViewFeed = findViewById(R.id.listviewfeed);
         feedList = new ArrayList<>();
         listViewFeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {

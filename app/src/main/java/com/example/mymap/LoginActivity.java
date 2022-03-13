@@ -1,8 +1,5 @@
 package com.example.mymap;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     private TextView signupnow;
-    private EditText phonetxt,passtxt;
+    private EditText phonetxt, passtxt;
     private Button loginbtn, signupbtn;
     FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -35,57 +35,53 @@ public class LoginActivity extends AppCompatActivity {
         passtxt = findViewById(R.id.txtloginpassword);
         loginbtn = findViewById(R.id.btnlogin);
 
+        findViewById(R.id.adminLogin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                startActivity(intent);
+            }
+        });
+
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull final FirebaseAuth firebaseAuth) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                if (firebaseUser!=null)
-                {
+                if (firebaseUser != null) {
 
-                        Toast.makeText(LoginActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
-                        startActivity(intent);
-                        LoginActivity.this.finish();
+                    Toast.makeText(LoginActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    LoginActivity.this.finish();
 
-                }
-                else
-                {
+                } else {
                     Toast.makeText(LoginActivity.this, "Please Login", Toast.LENGTH_SHORT).show();
                     loginbtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (phonetxt.getText().toString().trim().equalsIgnoreCase(""))
-                            {
+                            if (phonetxt.getText().toString().trim().equalsIgnoreCase("")) {
                                 phonetxt.setError("Enter E-mail");
-                            }
-                            else if (passtxt.getText().toString().trim().equalsIgnoreCase(""))
-                            {
+                            } else if (passtxt.getText().toString().trim().equalsIgnoreCase("")) {
                                 passtxt.setError("Enter password");
-                            }
-                            else if (!phonetxt.getText().toString().isEmpty()&&!passtxt.getText().toString().isEmpty())
-                            {
+                            } else if (!phonetxt.getText().toString().isEmpty() && !passtxt.getText().toString().isEmpty()) {
                                 String email = phonetxt.getText().toString();
-                                String password  = passtxt.getText().toString();
+                                String password = passtxt.getText().toString();
                                 loginbtn.setEnabled(false);
 
-                                firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (!task.isSuccessful()){
+                                        if (!task.isSuccessful()) {
                                             Toast.makeText(LoginActivity.this, "Login Failed, Try again", Toast.LENGTH_SHORT).show();
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
-                                            Intent intenthome = new Intent(LoginActivity.this,HomeActivity.class);
+                                            Intent intenthome = new Intent(LoginActivity.this, HomeActivity.class);
                                             startActivity(intenthome);
                                             LoginActivity.this.finish();
                                         }
                                     }
                                 });
-                            }
-                            else
-                            {
+                            } else {
                                 Toast.makeText(LoginActivity.this, "Invalid User", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -102,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         signupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,SignupActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
                 LoginActivity.this.finish();
             }
