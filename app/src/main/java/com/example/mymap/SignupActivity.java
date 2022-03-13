@@ -1,10 +1,6 @@
 package com.example.mymap;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,10 +11,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private EditText phonetxt,passtxt,username,emailid;
+    private EditText phonetxt, passtxt, username, emailid;
     private Button signupbtn;
     private TextView logintxt;
     private Spinner spinner;
@@ -41,7 +37,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_signup);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("users");
 
 
         phonetxt = findViewById(R.id.txtsignupphone);
@@ -52,7 +48,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
         emailid = findViewById(R.id.txtsignupemail);
         spinner = findViewById(R.id.spinnerbg);
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(SignupActivity.this,R.layout.custom_spinner,getResources().getStringArray(R.array.blood_group));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(SignupActivity.this, R.layout.custom_spinner, getResources().getStringArray(R.array.blood_group));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(myAdapter);
 
@@ -61,47 +57,32 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void onClick(View v) {
 
-                if(username.getText().toString().trim().equalsIgnoreCase(""))
-                {
+                if (username.getText().toString().trim().equalsIgnoreCase("")) {
                     username.setError("Enter Name");
-                }
-                else if (phonetxt.getText().toString().trim().equalsIgnoreCase(""))
-                {
+                } else if (phonetxt.getText().toString().trim().equalsIgnoreCase("")) {
                     phonetxt.setError("Enter Number");
-                }
-                else if (emailid.getText().toString().isEmpty())
-                {
+                } else if (emailid.getText().toString().isEmpty()) {
                     emailid.setError("Enter E-mail");
-                }
-
-                else if (passtxt.getText().toString().trim().equalsIgnoreCase(""))
-                {
+                } else if (passtxt.getText().toString().trim().equalsIgnoreCase("")) {
                     passtxt.setError("Enter Password");
-                }
-                else if (phonetxt.getText().toString().trim().length()<11 || phonetxt.getText().toString().trim().length()>11)
-                {
+                } else if (phonetxt.getText().toString().trim().length() < 11 || phonetxt.getText().toString().trim().length() > 11) {
                     phonetxt.setError("Invalid Number");
-                }
-                else
-                {
-                    String email = emailid.getText().toString();
+                } else {
+                    final String email = emailid.getText().toString();
                     String password = passtxt.getText().toString();
 
-                    firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(!task.isSuccessful())
-                            {
+                            if (!task.isSuccessful()) {
                                 Toast.makeText(SignupActivity.this, "Error, Please try again", Toast.LENGTH_SHORT).show();
 
-                            }
-                            else {
+                            } else {
                                 signupbtn.setEnabled(false);
-                                Intent intent = new Intent(SignupActivity.this,HomeActivity.class);
+                                Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
                                 startActivity(intent);
                                 SignupActivity.this.finish();
-                                adduser();
-
+                                adduser(email);
                             }
                         }
                     });
@@ -113,7 +94,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
         logintxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignupActivity.this,LoginActivity.class);
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                 startActivity(intent);
                 SignupActivity.this.finish();
 
@@ -131,13 +112,13 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    private void adduser()
-    {
+
+    private void adduser(String email) {
         String name = username.getText().toString().trim();
         String phone = phonetxt.getText().toString().trim();
         String bloodgroup = spinner.getSelectedItem().toString();
         String id = databaseReference.push().getKey();
-        User user = new User(id,name,phone,bloodgroup);
+        User user = new User(id, name, phone, bloodgroup, email);
         databaseReference.child(id).setValue(user);
         Toast.makeText(this, "Info Added to database", Toast.LENGTH_SHORT).show();
 

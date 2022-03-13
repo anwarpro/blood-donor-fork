@@ -31,7 +31,7 @@ public class DonorActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
     Toolbar toolbar;
-    Spinner spinner,spinnerarea;
+    Spinner spinner, spinnerarea;
     private FirebaseAuth.AuthStateListener authStateListener;
 
     ListView listView;
@@ -48,11 +48,11 @@ public class DonorActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(DonorActivity.this,R.layout.custom_spinner,getResources().getStringArray(R.array.blood_sort));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(DonorActivity.this, R.layout.custom_spinner, getResources().getStringArray(R.array.blood_sort));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(myAdapter);
 
-        ArrayAdapter<String> myareaAdapter = new ArrayAdapter<String>(DonorActivity.this,R.layout.custom_spinner,getResources().getStringArray(R.array.blood_area));
+        ArrayAdapter<String> myareaAdapter = new ArrayAdapter<String>(DonorActivity.this, R.layout.custom_spinner, getResources().getStringArray(R.array.blood_area));
         myareaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerarea.setAdapter(myareaAdapter);
 
@@ -61,18 +61,16 @@ public class DonorActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selected_group = spinner.getSelectedItem().toString();
 
-                if (selected_group.equals("All"))
-                {
+                if (selected_group.equals("All")) {
                     databaseReference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             userList.clear();
-                            for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
-                            {
+                            for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                                 User user = userSnapshot.getValue(User.class);
                                 userList.add(user);
                             }
-                            UserList adapter = new UserList(DonorActivity.this,userList);
+                            UserList adapter = new UserList(DonorActivity.this, userList);
                             listView.setAdapter(adapter);
                         }
 
@@ -81,10 +79,9 @@ public class DonorActivity extends AppCompatActivity {
 
                         }
                     });
-                }
-                else {
+                } else {
 
-                    Query query1 = FirebaseDatabase.getInstance().getReference("users")
+                    Query query1 = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("users")
                             .orderByChild("userBlood")
                             .equalTo(selected_group);
                     query1.addListenerForSingleValueEvent(
@@ -116,12 +113,11 @@ public class DonorActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         userList.clear();
-                        for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
-                        {
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                             User user = userSnapshot.getValue(User.class);
                             userList.add(user);
                         }
-                        UserList adapter = new UserList(DonorActivity.this,userList);
+                        UserList adapter = new UserList(DonorActivity.this, userList);
                         listView.setAdapter(adapter);
                     }
 
@@ -145,7 +141,7 @@ public class DonorActivity extends AppCompatActivity {
             }
         });
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("users");
 
 
         listView = (ListView) findViewById(R.id.listViewUsers);
@@ -155,10 +151,10 @@ public class DonorActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 User user = userList.get(i);
-                Intent intent = new Intent(getApplicationContext(),DonorDataActivity.class);
-                intent.putExtra(USER_NAME,user.getUserPhone());
-                intent.putExtra(USER_PHONE,user.getUserName());
-                intent.putExtra(USER_BLOOD,user.getUserBlood());
+                Intent intent = new Intent(getApplicationContext(), DonorDataActivity.class);
+                intent.putExtra(USER_NAME, user.getUserPhone());
+                intent.putExtra(USER_PHONE, user.getUserName());
+                intent.putExtra(USER_BLOOD, user.getUserBlood());
                 startActivity(intent);
             }
         });
@@ -171,12 +167,11 @@ public class DonorActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userList.clear();
-                for (DataSnapshot userSnapshot: dataSnapshot.getChildren())
-                {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     User user = userSnapshot.getValue(User.class);
                     userList.add(user);
                 }
-                UserList adapter = new UserList(DonorActivity.this,userList);
+                UserList adapter = new UserList(DonorActivity.this, userList);
                 listView.setAdapter(adapter);
             }
 

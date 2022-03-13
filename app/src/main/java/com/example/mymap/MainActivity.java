@@ -68,7 +68,7 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        databaseReference = FirebaseDatabase.getInstance().getReference("feed");
+        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("feed");
 
         requestPermission();
 
@@ -157,7 +157,7 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                 }
                 else {
 
-                    Query query1 = FirebaseDatabase.getInstance().getReference("feed")
+                    Query query1 = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("feed")
                             .orderByChild("feedBlood")
                             .equalTo(selected_group);
                     query1.addListenerForSingleValueEvent(
@@ -266,8 +266,6 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
         map = googleMap;
 
 
-
-
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
@@ -299,11 +297,6 @@ public class MainActivity  extends FragmentActivity implements OnMapReadyCallbac
                                 public void onClick(View view) {
                                     btnpat.setVisibility(View.GONE);
                                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
-
-
-
-                                    //here
-
 
 
                                     databaseReference.addValueEventListener(new ValueEventListener() {

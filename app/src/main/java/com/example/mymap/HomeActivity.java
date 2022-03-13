@@ -1,43 +1,18 @@
 package com.example.mymap;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.navigation.NavigationView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,26 +20,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-
 public class HomeActivity extends AppCompatActivity {
-    CardView donor,map,feed,bed,hospital,bank,profile,about,group;
-    DatabaseReference databaseReference,dbd;
-    TextView tvd,tvr;
-    private int countd,countr;
+    CardView donor, map, feed, bed, hospital, bank, profile, about, group;
+    DatabaseReference databaseReference, dbd;
+    TextView tvd, tvr;
+    private int countd, countr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().setTitle("Blood Donor App");
-        databaseReference = FirebaseDatabase.getInstance().getReference("feed");
-        dbd = FirebaseDatabase.getInstance().getReference("users");
-
+        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("feed");
+        dbd = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("users");
 
 
         feed = findViewById(R.id.feedcard);
@@ -83,10 +51,9 @@ public class HomeActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists())
-                {
+                if (dataSnapshot.exists()) {
                     countr = (int) dataSnapshot.getChildrenCount();
-                    tvr.setText(Integer.toString(countr) +"\n"+ "Requests");
+                    tvr.setText(Integer.toString(countr) + "\n" + "Requests");
 
                 }
             }
@@ -100,10 +67,9 @@ public class HomeActivity extends AppCompatActivity {
         dbd.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists())
-                {
+                if (dataSnapshot.exists()) {
                     countd = (int) dataSnapshot.getChildrenCount();
-                    tvd.setText(Integer.toString(countd)+"\n"+"Donors");
+                    tvd.setText(Integer.toString(countd) + "\n" + "Donors");
 
                 }
             }
@@ -117,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
         donor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,DonorActivity.class);
+                Intent intent = new Intent(HomeActivity.this, DonorActivity.class);
                 startActivity(intent);
             }
         });
@@ -125,56 +91,56 @@ public class HomeActivity extends AppCompatActivity {
         feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,FeedActivity.class);
+                Intent intent = new Intent(HomeActivity.this, FeedActivity.class);
                 startActivity(intent);
             }
         });
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,MainActivity.class);
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
         bed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,AddFeedActivity.class);
+                Intent intent = new Intent(HomeActivity.this, AddFeedActivity.class);
                 startActivity(intent);
             }
         });
         hospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,HospitalActivity.class);
+                Intent intent = new Intent(HomeActivity.this, HospitalActivity.class);
                 startActivity(intent);
             }
         });
         bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,BankActivity.class);
+                Intent intent = new Intent(HomeActivity.this, BankActivity.class);
                 startActivity(intent);
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,ProfileActivity.class);
+                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,RulesActivity.class);
+                Intent intent = new Intent(HomeActivity.this, RulesActivity.class);
                 startActivity(intent);
             }
         });
         group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,GroupsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, GroupsActivity.class);
                 startActivity(intent);
             }
         });
@@ -191,20 +157,16 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.itemhelp:
-                Toast.makeText(this, "Call 01521329977", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Call 01712329913", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.itemlogout:
                 FirebaseAuth.getInstance().signOut();
-                Intent intent2 = new Intent(HomeActivity.this,LoginActivity.class);
+                Intent intent2 = new Intent(HomeActivity.this, LoginActivity.class);
                 startActivity(intent2);
                 HomeActivity.this.finish();
-                return true;
-            case R.id.itemabout:
-                Intent intent = new Intent(HomeActivity.this,AboutActivity.class);
-                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

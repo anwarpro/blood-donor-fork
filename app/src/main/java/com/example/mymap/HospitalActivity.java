@@ -29,7 +29,7 @@ public class HospitalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital);
-        databaseReference = FirebaseDatabase.getInstance().getReference("hospitals");
+        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("hospitals");
 
         getSupportActionBar().setTitle("Hospitals");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

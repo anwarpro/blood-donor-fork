@@ -30,7 +30,7 @@ public class BankActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank);
-        databaseReference = FirebaseDatabase.getInstance().getReference("banks");
+        databaseReference = FirebaseDatabase.getInstance("https://mymap-9ae65-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("banks");
 
         getSupportActionBar().setTitle("Blood Banks");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,9 +41,9 @@ public class BankActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Bank bank = bankList.get(i);
-                Intent intent = new Intent(BankActivity.this,PopupActivity.class);
-                intent.putExtra(BANK_NAME,bank.getBankName());
-                intent.putExtra(BANK_PHONE,bank.getBankPhone());
+                Intent intent = new Intent(BankActivity.this, PopupActivity.class);
+                intent.putExtra(BANK_NAME, bank.getBankName());
+                intent.putExtra(BANK_PHONE, bank.getBankPhone());
                 startActivity(intent);
             }
         });
@@ -57,12 +57,11 @@ public class BankActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 bankList.clear();
-                for (DataSnapshot bankSnapshot : dataSnapshot.getChildren())
-                {
+                for (DataSnapshot bankSnapshot : dataSnapshot.getChildren()) {
                     Bank bank = bankSnapshot.getValue(Bank.class);
                     bankList.add(bank);
                 }
-                BankList adapter = new BankList(BankActivity.this,bankList);
+                BankList adapter = new BankList(BankActivity.this, bankList);
                 listViewBank.setAdapter(adapter);
             }
 
