@@ -12,17 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/btnViewRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_design_signup"
+            android:padding="8dp"
+            android:text="All Requests"
+            android:textColor="#fff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </Button>
+
         <TextView
             android:id="@+id/txtaddhospital"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="16dp"
             android:background="#660000"
             android:text="Add Hospital"
             android:textAlignment="center"
             android:textColor="#fff"
             android:textSize="24sp"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/btnViewRequest">
 
         </TextView>
 

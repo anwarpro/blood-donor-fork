@@ -1,10 +1,5 @@
 package com.example.mymap;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,10 +11,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 public class PopupActivity extends AppCompatActivity {
     private static final int REQUEST_CALL = 1;
     TextView hospnamepop;
-    Button bndir,bncall;
+    Button bndir, bncall, bnDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class PopupActivity extends AppCompatActivity {
 
         hospnamepop = findViewById(R.id.textViewpop);
         bncall = findViewById(R.id.popbtncall);
+        bnDelete = findViewById(R.id.popbtndelete);
         bndir = findViewById(R.id.popbtnmap);
 
 
@@ -36,6 +37,9 @@ public class PopupActivity extends AppCompatActivity {
         String phone = intent.getStringExtra(HospitalActivity.HOSP_PHONE);
         String bname = intent.getStringExtra(BankActivity.BANK_NAME);
         String fname = intent.getStringExtra(FeedActivity.FEED_NAME);
+        boolean isAdmin = intent.getBooleanExtra(FeedActivity.IS_ADMIN, false);
+
+        bnDelete.setVisibility(isAdmin ? View.VISIBLE : View.GONE);
 
         hospnamepop.setText(name);
         hospnamepop.setText(bname);
@@ -47,8 +51,7 @@ public class PopupActivity extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width*0.8),(int)(height*0.25));
-
+        getWindow().setLayout((int) (width * 0.8), (int) (height * 0.25));
 
 
         bncall.setOnClickListener(new View.OnClickListener() {
@@ -59,17 +62,27 @@ public class PopupActivity extends AppCompatActivity {
             }
         });
 
+        bnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //delete feed
+                setResult(RESULT_OK);
+                PopupActivity.this.finish();
+            }
+        });
+
 
         bndir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(PopupActivity.this,DirectionActivity.class);
+                Intent intent1 = new Intent(PopupActivity.this, DirectionActivity.class);
                 startActivity(intent1);
                 PopupActivity.this.finish();
             }
         });
     }
-    private void makePhoneCall(){
+
+    private void makePhoneCall() {
         Intent intent = getIntent();
         String name = intent.getStringExtra(HospitalActivity.HOSP_NAME);
         String phone = intent.getStringExtra(HospitalActivity.HOSP_PHONE);
@@ -77,10 +90,9 @@ public class PopupActivity extends AppCompatActivity {
         String bphone = intent.getStringExtra(BankActivity.BANK_PHONE);
         String fname = intent.getStringExtra(FeedActivity.FEED_NAME);
         String fphone = intent.getStringExtra(FeedActivity.FEED_PHONE);
-        if (ContextCompat.checkSelfPermission(PopupActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(PopupActivity.this, new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
-        }
-        else{
+        if (ContextCompat.checkSelfPermission(PopupActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PopupActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
             String dial = "tel:" + phone;
             startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
             Toast.makeText(this, "calling " + name, Toast.LENGTH_SHORT).show();
@@ -94,10 +106,11 @@ public class PopupActivity extends AppCompatActivity {
             Toast.makeText(this, "calling " + fname, Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CALL){
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == REQUEST_CALL) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 makePhoneCall();
             }
         }

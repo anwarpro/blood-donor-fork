@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddLocationActivity"></activity>
+        <activity android:name=".AddLocationActivity" />
         <activity android:name=".DirectionActivity" />
         <activity
             android:name=".PopupActivity"
@@ -33,9 +33,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".AddByAdmin"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".AdminActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ThalassemiaActivity"
@@ -73,11 +70,28 @@
         <activity
             android:name=".HomeActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".LoginActivity"
+            android:label="Blood Donor"
             android:screenOrientation="portrait"
+            android:taskAffinity="com.example.mymap.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
+                <action android:name=".Admin" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".AdminActivity"
+            android:label="Admin"
+            android:screenOrientation="portrait"
+            android:taskAffinity="com.example.mymap.AdminActivity">
+            <intent-filter>
+                <action android:name=".BloodDonor" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -95,6 +109,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
     </application>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

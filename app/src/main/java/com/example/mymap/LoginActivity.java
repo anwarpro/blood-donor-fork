@@ -35,13 +35,13 @@ public class LoginActivity extends AppCompatActivity {
         passtxt = findViewById(R.id.txtloginpassword);
         loginbtn = findViewById(R.id.btnlogin);
 
-        findViewById(R.id.adminLogin).setOnClickListener(new View.OnClickListener() {
+  /*      findViewById(R.id.adminLogin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
