@@ -1,11 +1,7 @@
 package com.example.mymap;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Trace;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,6 +10,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -107,14 +106,13 @@ public class AddFeedActivity extends AppCompatActivity {
         String bloodbag = spinnerBag.getSelectedItem().toString();
         String location = txtloc1.getText().toString();
         String location2 = txtloc2.getText().toString();
-        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(date) && !location.equals("latitude") && !location2.equals("longitude") && !address.equals("Select Area"))
+        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(date) && !address.equals("Select Area"))
         {
             String id = databaseReference.push().getKey();
             Feed feed = new Feed(id,name,address,bloodgrp,phone,bloodbag,date,hosp,location,location2);
             databaseReference.child(id).setValue(feed);
             Toast.makeText(this, "Posted", Toast.LENGTH_SHORT).show();
             AddFeedActivity.this.finish();
-
         }
         else
         {
